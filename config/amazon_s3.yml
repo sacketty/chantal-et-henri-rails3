@@ -1,0 +1,14 @@
+development:
+  bucket: chantal-et-henri.playlist
+  max_file_size: 10485760
+  acl: public-read
+    
+test:
+  bucket: chantal-et-henri.playlist
+  max_file_size: 10485760
+  acl: public-read
+  
+production:
+  bucket: chantal-et-henri.playlist
+  max_file_size: 10485760
+  acl: public-read
