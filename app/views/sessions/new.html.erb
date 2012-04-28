@@ -32,8 +32,10 @@
 </div>
 <section class="container" id="mainPage">
       <% flash.each do |name, msg| %>
-        <div class="alert-<%= name == :notice ? "success" : "error" %>">
-        	<%= msg %>
+        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+        	<a class="close" data-dismiss="alert">x</a>
+        	<h4 class="alert-heading">Enregistrement</h4>
+         	<%= msg %>
         </div>
       <% end %>
 	<div class="hero-unit">

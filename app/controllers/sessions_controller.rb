@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SessionsController < ApplicationController
   def new
   end
@@ -8,7 +9,7 @@ class SessionsController < ApplicationController
     if(user.activated)
       redirect_to root_url
     else
-    redirect_to root_url, notice: "Bienvenue, "+user.first_name+".Donnes nous 24 - 48 heures pour activer ton compte"
+    redirect_to root_url, notice: "Bienvenue, "+user.first_name+". Donnes nous 24 - 48 heures pour activer ton compte"
     end
   end
 
@@ -19,6 +20,6 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to root_url, alert: "Authentication failed, please try again."
+    redirect_to root_url, alert: "Authentification échouée. Essaye encore ..."
   end
 end
