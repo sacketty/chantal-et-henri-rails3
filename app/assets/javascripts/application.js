@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require globals
-//= require bootstrap
 //= require underscore
 //= require backbone
 //

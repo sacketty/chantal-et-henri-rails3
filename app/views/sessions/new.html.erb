@@ -8,17 +8,17 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#">Chantal et Henri</a>
+          <% if current_user %>
           <div class="btn-group pull-right">
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> Username
+              <i class="icon-user"></i> <%= current_user.name %>
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Sign Out</a></li>
+              <li><%= link_to "Déconnection", logout_path %></li>
             </ul>
           </div>
+          <% end %>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
@@ -31,6 +31,11 @@
     </div>
 </div>
 <section class="container" id="mainPage">
+      <% flash.each do |name, msg| %>
+        <div class="alert-<%= name == :notice ? "success" : "error" %>">
+        	<%= msg %>
+        </div>
+      <% end %>
 	<div class="hero-unit">
 		<h1>Chantal et Henri</h1>
 		<p>
@@ -101,8 +106,3 @@
 
 </section>
 
-
-<% if current_user %>
-
-  <p><%= link_to "Log out", logout_path %></p>
-<% end %>
