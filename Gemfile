@@ -19,3 +19,6 @@ gem 's3_swf_upload', :git => 'git://github.com/nathancolgate/s3-swf-upload-plugi
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+
+gem 'backbone-on-rails'
+

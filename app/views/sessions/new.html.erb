@@ -1,35 +1,108 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Chantal et Henri</a>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> Username
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Sign Out</a></li>
+            </ul>
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+</div>
+<section class="container" id="mainPage">
+	<div class="hero-unit">
+		<h1>Chantal et Henri</h1>
+		<p>
+			Informations pratiques sur le mariage
+		</p>
+	</div>
+	<% if current_user %>
+		<div class="row" id="user-active">
+			<p id="picture" style="background-image: url(https://graph.facebook.com/<%= current_user.uid %>/picture?type=normal)"></p>
+			<div>
+				<h1>Bienvenue, <strong><%= current_user.first_name %></strong></h1>
+				<p class="tagline">
+					Propose tes choix pour la playlist de la soirée
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">
+				<p>
+					<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large" id="a-modal"> <span class="plus">Proposer un titre</span> </a>
+				</p>
+				<p>
+					<a class="btn btn-primary btn-large" id="btn-upload">Uploader un MP3 &raquo;</a>
+				</p>
+				<p>
+					<a class="btn btn-danger btn-large" id="btn-delete">Supprimer</a>
+				</p>
+			</div>
+			<div class="span9">
+				<!-- 
+					<h2>Four types of forms</h2>
+					<p>
+						Bootstrap provides simple markup and styles for four styles of common web forms.
+					</p>
+					-->
+				<table class="table table-bordered table-striped table-condensed">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Titre</th>
+							<th>Artiste</th>
+							<th>Catégories</th>
+						</tr>
+					</thead>
+					<tbody id="playlist">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<% else %>
+  		<h2>Pour se connecter:</h2>
+  		<p><strong>Utilise un des services ci-dessous:</strong></p>
+		  <div class="auth_providers">
+		    <a href="/auth/twitter" class="auth_provider">
+		      <%= image_tag "twitter_64.png", size: "64x64", alt: "Twitter" %>
+		      Twitter
+		    </a>
+		    <a href="/auth/facebook" class="auth_provider">
+		      <%= image_tag "facebook_64.png", size: "64x64", alt: "Facebook" %>
+		      Facebook
+		    </a>
+		    <a href="/auth/google_apps" class="auth_provider">
+			<%= image_tag "google_apps_64.png", size: "64x64", alt: "Google" %>
+			Google
+			</a>
+		</div>
+  <% end %>
+
+</section>
+
+
 <% if current_user %>
-  <h1>User Profile</h1>
-  <p>
-    <strong>Name:</strong>
-    <%= current_user.name %>
-  </p>
-  <p>
-    <strong>Provider:</strong>
-    <%= current_user.provider %>
-  </p>
-  <p>
-    <strong>OmniAuth UID:</strong>
-    <%= current_user.uid %>
-  </p>
+
   <p><%= link_to "Log out", logout_path %></p>
-<% else %>
-  <h1>Sign In</h1>
-
-  <p><strong>Sign in through one of these services:</strong></p>
-
-  <div class="auth_providers">
-    <a href="/auth/twitter" class="auth_provider">
-      <%= image_tag "twitter_64.png", size: "64x64", alt: "Twitter" %>
-      Twitter
-    </a>
-    <a href="/auth/facebook" class="auth_provider">
-      <%= image_tag "facebook_64.png", size: "64x64", alt: "Facebook" %>
-      Facebook
-    </a>
-    <a href="/auth/google_apps" class="auth_provider">
-      <%= image_tag "google_apps_64.png", size: "64x64", alt: "Google" %>
-      Google
-    </a>
-  </div>
 <% end %>
