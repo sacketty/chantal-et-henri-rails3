@@ -1,35 +1,3 @@
-<div class="navbar navbar-fixed-top">
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Chantal et Henri</a>
-          <% if current_user %>
-          <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> <%= current_user.name %>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Déconnection", logout_path %></li>
-            </ul>
-          </div>
-          <% end %>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
-</div>
 <section class="container" id="mainPage">
       <% flash.each do |name, msg| %>
         <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
@@ -38,58 +6,33 @@
          	<%= msg %>
         </div>
       <% end %>
+	<% if current_user %>
+			<div class="hero-unit">
+				<div class="span2">
+					<div class="thumbnail">
+						<img src="https://graph.facebook.com/<%= current_user.uid %>/picture?type=normal" alt="">
+					</div>
+				</div>
+				<h2>Bienvenue, <strong><%= current_user.first_name %></strong></h2>
+				<p class="tagline">Merci de nous aider à préparer la soirée.</p>
+				<p class="tagline"><a href="/songs">Vas sur le gestionnaire de playlist si tu as des titres que tu souhaites avoir en cette occasion</a></p>
+				<h4>Les liens</h4>
+				<dl>
+					<dt><a href="/songs">Playlist</a></dt>
+					<dd>Pour entrer les titres que tu souhaites entendre au cours de la soirée<p></dd>
+					<dt><a href="/upload">Uploader</a></dt>
+					<dd>Si tu as des 'mp3' que tu souhaites nous envoyer...<p></dd>
+				</dl>
+			</div>
+	<% else %>
 	<div class="hero-unit">
 		<h1>Chantal et Henri</h1>
 		<p>
 			Informations pratiques sur le mariage
 		</p>
 	</div>
-	<% if current_user %>
-		<div class="row" id="user-active">
-			<p id="picture" style="background-image: url(https://graph.facebook.com/<%= current_user.uid %>/picture?type=normal)"></p>
-			<div>
-				<h1>Bienvenue, <strong><%= current_user.first_name %></strong></h1>
-				<p class="tagline">
-					Propose tes choix pour la playlist de la soirée
-				</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span3">
-				<p>
-					<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large" id="a-modal"> <span class="plus">Proposer un titre</span> </a>
-				</p>
-				<p>
-					<a class="btn btn-primary btn-large" id="btn-upload">Uploader un MP3 &raquo;</a>
-				</p>
-				<p>
-					<a class="btn btn-danger btn-large" id="btn-delete">Supprimer</a>
-				</p>
-			</div>
-			<div class="span9">
-				<!-- 
-					<h2>Four types of forms</h2>
-					<p>
-						Bootstrap provides simple markup and styles for four styles of common web forms.
-					</p>
-					-->
-				<table class="table table-bordered table-striped table-condensed">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Titre</th>
-							<th>Artiste</th>
-							<th>Catégories</th>
-						</tr>
-					</thead>
-					<tbody id="playlist">
-					</tbody>
-				</table>
-			</div>
-		</div>
-	<% else %>
   		<h2>Pour se connecter:</h2>
-  		<p><strong>Utilise un des services ci-dessous:</strong></p>
+  		<p><strong>Utilises un des services ci-dessous:</strong></p>
 		  <div class="auth_providers">
 		    <a href="/auth/twitter" class="auth_provider">
 		      <%= image_tag "twitter_64.png", size: "64x64", alt: "Twitter" %>
@@ -99,7 +42,7 @@
 		      <%= image_tag "facebook_64.png", size: "64x64", alt: "Facebook" %>
 		      Facebook
 		    </a>
-		    <a href="/auth/google_apps" class="auth_provider">
+		    <a href="/auth/google_oauth2" class="auth_provider">
 			<%= image_tag "google_apps_64.png", size: "64x64", alt: "Google" %>
 			Google
 			</a>

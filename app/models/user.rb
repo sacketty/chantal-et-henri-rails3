@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # attr_accessible :title, :body
-  has_and_belongs_to_many :songs
+  has_and_belongs_to_many :songs, :uniq => true, :autosave => true
 
   def self.from_omniauth(auth)
     find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)

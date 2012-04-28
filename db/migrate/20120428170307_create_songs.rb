@@ -5,6 +5,7 @@ class CreateSongs < ActiveRecord::Migration
       t.string :titre
       t.string :artiste
       t.string :url
+
       t.timestamps
     end
     add_index :songs, :titre

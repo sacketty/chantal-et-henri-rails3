@@ -3,4 +3,3 @@ class CH.Routers.Users extends Backbone.Router
     '': 'index'
     
   index: ->
-    alert 'home page!'

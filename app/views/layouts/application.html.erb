@@ -1,14 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Chantal et Henri</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-    <div id="container">
-      <%= yield %>
-    </div>
-</body>
+	<head>
+		<title>Chantal et Henri</title>
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div id="container-fluid">
+			<div class="navbar navbar-fixed-top">
+				<div class="navbar navbar-fixed-top">
+					<div class="navbar-inner">
+						<div class="container-fluid">
+							<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+							<a class="brand" href="#">Chantal et Henri</a>
+							<% if current_user %>
+							<div class="btn-group pull-right">
+								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <i class="icon-user"></i> <%= current_user.name %> <span class="caret"></span> </a>
+								<ul class="dropdown-menu">
+									<li>
+										<%= link_to "Déconnection", logout_path %>
+									</li>
+								</ul>
+							</div>
+							<% end %>
+							<div class="nav-collapse">
+								<ul class="nav">
+									<li class="active">
+										<a href="/">Home</a>
+									</li>
+									<li>
+										<a href="/songs">Playlist</a>
+									</li>
+									<li>
+										<a href="/upload">Envoyer des MP3</a>
+									</li>
+									<li>
+										<a href="#contact">Contact</a>
+									</li>
+								</ul>
+							</div><!--/.nav-collapse -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<% if current_user %>
+			<div class="row">
+				<div class="span3"><h3>Les infos...</h3></div>
+				<div class="span9"><%= yield %></div>
+			</div>
+			<% else %>
+				<%= yield %>
+			<% end %>
+		</div>
+	</body>
 </html>
