@@ -1,5 +1,6 @@
 class CH.Routers.Users extends Backbone.Router
   routes:
-    '': 'index'
+    '#test': 'test'
     
-  index: ->
+  test: ->
+    alert "loaded router .."
