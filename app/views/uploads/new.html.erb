@@ -78,6 +78,11 @@ var progressHandler = function(progress_event){
 var uploadCompleteHandler = function(upload_options,event){
 	queueBytesLoaded += parseInt(upload_options.FileSize);
 	addFileToDoneList(upload_options.FileName,upload_options.FileSize);
+	var song = new CH.Models.Song({
+		key: upload_options.FileName,
+		titre: upload_options.FileName
+	});
+	song.save();
 };
 
 var readableBytes = function(bytes) {
@@ -99,8 +104,8 @@ var readableBytes = function(bytes) {
 	<div id="overall"><span class="progress"><span class="amount">10%</span></span><span id="status"></span></div>
 
 	<%=raw s3_swf_upload_tag(
-		:fileTypes => '*.jpg;*.gif;*.png;',
-	  :fileTypeDescs => 'Image files.',
+		:fileTypes => '*.m4p;*.ogg;*.mp3;*.ac3;',
+	    :fileTypeDescs => 'Audio files.',
 		:onFileNotInQueue => "alert('File not found in the queue');",
 		:onFileSizeLimitReached => "alert('That file is too big');",
 		:onQueueChange => "queueChangeHandler(queue);",
@@ -113,7 +118,7 @@ var readableBytes = function(bytes) {
 		:onSignatureXMLError => "alert('There was an error (:onSignatureXMLError)');",
 		:onSignatureSecurityError => "alert('There was an error (:onSignatureSecurityError)');",
 		:onUploadError => "alert('There was an error (:onUploadError)');",
-		:onUploadIOError => "alert('There was an error (:onUploadIOError)');",
+		:onUploadIOError => "alert('Erreur de transmission (ce titre existe peut-être déjà)');",
 		:onUploadSecurityError => "alert('There was an error (:onUploadSecurityError)');",
 		:onUploadProgress => "progressHandler(progress_event);",
 		:onUploadComplete => "uploadCompleteHandler(upload_options,event);"

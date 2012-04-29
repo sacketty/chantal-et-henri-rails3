@@ -13,11 +13,12 @@ class S3UploadsController < ApplicationController
     access_key_id   = S3SwfUpload::S3Config.access_key_id
     acl             = S3SwfUpload::S3Config.acl
     secret_key      = S3SwfUpload::S3Config.secret_access_key
-    key             = params[:key]
+    key             = Song.find_by_key(params[:key])  ? "N/A" : params[:key] #to prevent overwriting
     content_type    = params[:content_type]
     https           = 'false'
     error_message   = ''
     expiration_date = 1.hours.from_now.utc.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+     
 
     policy = Base64.encode64(
 "{

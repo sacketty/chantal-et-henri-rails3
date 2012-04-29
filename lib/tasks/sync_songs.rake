@@ -1,13 +1,16 @@
 namespace :ch do
-
-  desc 'synchronise the song database with S3 bucket'
-  task :sync => :environment do
+  
+  task :init => :environment do
     AWS::S3::Base.establish_connection!(
       :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     )
     BUCKET = 'chantal-et-henri.playlist'
+  end
 
+  desc 'synchronise the song database with S3 bucket'
+  task :sync => :init do
+    Song.delete_all("key IS NOT NULL")
     AWS::S3::Bucket.find(BUCKET).objects.each do |song|
       if song.content_type=='audio/mpeg'
         unless Song.find_by_key(song.key)
