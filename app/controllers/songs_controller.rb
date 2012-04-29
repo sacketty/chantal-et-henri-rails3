@@ -4,7 +4,14 @@ class SongsController < ApplicationController
   # GET /songs.json
   def index
     @songs = current_user.songs
-
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @songs }
+    end
+  end
+  
+  def all
+    @songs = Song.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @songs }
@@ -14,7 +21,7 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
-    @song = current_user.songs.find_by_id(params[:id])
+    @song = Song.find_by_id(params[:id])
 
     respond_to do |format|
       if(@song)
@@ -22,7 +29,7 @@ class SongsController < ApplicationController
         format.json { render json: @song }
       else
         @songs = current_user.songs
-        format.html { render action: "index", error: 'Requete invalide' }
+        format.html { redirect_to songs_url, alert: 'Requete invalide' }
         format.json { render json: {}, status: :unprocessable_entity }
       end
     end
@@ -87,7 +94,7 @@ class SongsController < ApplicationController
   # DELETE /songs/1.json
   def destroy
     @song = Song.find(params[:id])
-    @song.destroy
+    @song.key ? @song.categories.delete_all : @song.destroy
 
     respond_to do |format|
       format.html { redirect_to songs_url }

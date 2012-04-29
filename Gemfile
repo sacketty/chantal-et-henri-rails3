@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.3'
 gem 'therubyracer'
 gem 'pg'
+gem 'aws-s3'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

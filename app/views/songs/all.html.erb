@@ -1,0 +1,22 @@
+<%- model_class = Song.new.class -%>
+<h2>Tous les morceaux</h2><p></p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:titre) %></th>
+      <th><%= model_class.human_attribute_name(:artiste) %></th>
+      <th>Catégories</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each do |song| %>
+      <tr>
+        <td><%= link_to song.id, song_path(song) %></td>
+        <td><%= song.titre %></td>
+        <td><%= song.artiste %></td>
+        <td><%= (song.categories.map {|c| c.name}).join(", ") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
