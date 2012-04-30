@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :admin, :activated
   has_many :category_users, :dependent => :destroy
   has_many :songs, :through => :category_users
   has_many :uploads, :through => :songs

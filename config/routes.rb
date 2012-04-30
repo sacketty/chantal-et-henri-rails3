@@ -4,6 +4,7 @@ ChantalEtHenriRails3::Application.routes.draw do
   resources :songs
   resources :s3_uploads
   resources :uploads
+  resources :users
   root to: "sessions#new"
   match "/auth/:provider/callback", to: "sessions#create"
   match "/auth/failure", to: "sessions#failure"

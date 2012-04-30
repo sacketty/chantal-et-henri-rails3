@@ -13,10 +13,12 @@
   <strong><%= model_class.human_attribute_name(:categories) %>:</strong><br>
   <%= @song.category_list %>
 </p>
+<% if @song.upload %>
 <p>
   <strong><%= model_class.human_attribute_name(:url) %>:</strong><br>
-  <%= @song.url %>
+  <a href='<%= @song.s3_url %>'>Télécharger</a>
 </p>
+<% end %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

@@ -19,6 +19,12 @@ private
       redirect_to root_url, alert: "Vous devez vous connecter pour accéder à cette section"
     end
   end
+  
+  def require_admin
+    unless (logged_in? && current_user.admin)
+      redirect_to root_url, alert: "Manque de pot! pas autorisé à accéder à cette section"
+    end
+  end
  
   # really mean to convert something into true or false.
   def logged_in?
