@@ -13,7 +13,7 @@ class S3UploadsController < ApplicationController
     access_key_id   = S3SwfUpload::S3Config.access_key_id
     acl             = S3SwfUpload::S3Config.acl
     secret_key      = S3SwfUpload::S3Config.secret_access_key
-    key             = Song.find_by_key(params[:key])  ? "N/A" : params[:key] #to prevent overwriting
+    key             = Upload.find_by_key(params[:key])  ? "N/A" : params[:key] #to prevent overwriting
     content_type    = params[:content_type]
     https           = 'false'
     error_message   = ''

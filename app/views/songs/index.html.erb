@@ -7,6 +7,7 @@
       <th><%= model_class.human_attribute_name(:titre) %></th>
       <th><%= model_class.human_attribute_name(:artiste) %></th>
       <th>Catégories</th>
+      <th>Ecouter</>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -17,6 +18,21 @@
         <td><%= song.titre %></td>
         <td><%= song.artiste %></td>
         <td><%= (song.categories.map {|c| c.name}).join(", ") %></td>
+        <td>
+        <% if song.upload %>
+        	<div id='mediaplayer_<%= song.id%>'></div>
+			<script type="text/javascript">
+				jwplayer('mediaplayer_<%= song.id %>').setup({
+					'flashplayer': '/assets/jwplayer/player.swf',
+					'id': 'playerID_<%=song.id %>',
+					'width': '220',
+					'height': '24',
+					'file': '<%= song.s3_url %>',
+ 					'controlbar': 'bottom'
+				});
+			</script>
+        <% end %>
+        </td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_song_path(song), :class => 'btn btn-mini' %>

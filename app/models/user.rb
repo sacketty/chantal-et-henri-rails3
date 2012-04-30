@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   has_many :category_users, :dependent => :destroy
   has_many :songs, :through => :category_users
+  has_many :uploads, :through => :songs
 
   def self.from_omniauth(auth)
     find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)

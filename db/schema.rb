@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120429160325) do
+ActiveRecord::Schema.define(:version => 20120430082743) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20120429160325) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "key"
+    t.integer  "upload_id"
   end
 
   add_index "songs", ["titre"], :name => "index_songs_on_titre"
@@ -47,6 +48,14 @@ ActiveRecord::Schema.define(:version => 20120429160325) do
 
   add_index "songs_users", ["song_id"], :name => "index_songs_users_on_song_id"
   add_index "songs_users", ["user_id"], :name => "index_songs_users_on_user_id"
+
+  create_table "uploads", :force => true do |t|
+    t.string   "key"
+    t.string   "titre"
+    t.string   "artiste"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "uid"

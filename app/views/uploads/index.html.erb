@@ -1,5 +1,5 @@
-<%- model_class = Song.new.class -%>
-<h2>Tous les morceaux</h2><p></p>
+<%- model_class = Upload.new.class -%>
+<h2>Tous les MP3s</h2><p></p>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -11,26 +11,24 @@
     </tr>
   </thead>
   <tbody>
-    <% @songs.each do |song| %>
+    <% Upload.all.each do |ul| %>
       <tr>
-        <td><%= link_to song.id, song_path(song) %></td>
-        <td><%= song.titre %></td>
-        <td><%= song.artiste %></td>
-        <td><%= (song.categories.map {|c| c.name}).join(", ") %></td>
+        <td><%= link_to ul.id, upload_path(ul) %></td>
+        <td><%= ul.titre %></td>
+        <td><%= ul.artiste %></td>
+        <td><%= (ul.categories.map {|c| c.name}).join(", ") %></td>
         <td>
-        <% if song.upload %>
-        	<div id='mediaplayer_<%= song.id%>'></div>
+        <div id='mediaplayer_<%= ul.id%>'></div>
 			<script type="text/javascript">
-				jwplayer('mediaplayer_<%= song.id %>').setup({
+				jwplayer('mediaplayer_<%= ul.id %>').setup({
 					'flashplayer': '/assets/jwplayer/player.swf',
-					'id': 'playerID_<%=song.id %>',
+					'id': 'playerID_<%=ul.id %>',
 					'width': '280',
 					'height': '24',
-					'file': '<%= song.s3_url %>',
+					'file': '<%= ul.s3_url %>',
  					'controlbar': 'bottom'
 				});
-			</script>
-        <% end %>
+		</script>
         </td>
       </tr>
     <% end %>

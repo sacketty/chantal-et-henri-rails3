@@ -10,11 +10,10 @@ namespace :ch do
 
   desc 'synchronise the song database with S3 bucket'
   task :sync => :init do
-    Song.delete_all("key IS NOT NULL")
     AWS::S3::Bucket.find(BUCKET).objects.each do |song|
-      if song.content_type=='audio/mpeg'
-        unless Song.find_by_key(song.key)
-          Song.create! do |sg|
+      unless song.content_type =='text/xml'
+        unless Upload.find_by_key(song.key)
+          Upload.create! do |sg|
             sg.key = song.key
             sg.titre = song.metadata[:titre]
             sg.artiste = song.metadata[:artiste]

@@ -1,31 +1,31 @@
-<%- model_class = @song.class -%>
+<%- model_class = @ul.class -%>
 <h2>Détails du titre</h2>
 <p>
   <strong><%= model_class.human_attribute_name(:titre) %>:</strong><br>
-  <%= @song.titre %>
+  <%= @ul.titre %>
 </p>
 <p>
   <strong><%= model_class.human_attribute_name(:artiste) %>:</strong><br>
-  <%= @song.artiste %>
+  <%= @ul.artiste %>
 </p>
 
 <p>
   <strong><%= model_class.human_attribute_name(:categories) %>:</strong><br>
-  <%= @song.category_list %>
+  <%= @ul.category_list %>
 </p>
 <p>
   <strong><%= model_class.human_attribute_name(:url) %>:</strong><br>
-  <%= @song.url %>
+  <a href='<%= @ul.s3_url %>'>Télécharger</a>
 </p>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              songs_path, :class => 'btn'  %>
+              uploads_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_song_path(@song), :class => 'btn' %>
-          <% if current_user.songs.include?(@song) %>
+              edit_upload_path(@ul), :class => 'btn' %>
+          <% if current_user.admin %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              song_path(@song),
+              upload_path(@song),
               :method => 'delete',
               :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
               :class => 'btn btn-danger' %>

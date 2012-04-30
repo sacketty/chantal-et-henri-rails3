@@ -93,9 +93,10 @@ class SongsController < ApplicationController
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
-    @song = Song.find(params[:id])
-    @song.key ? @song.categories.delete_all : @song.destroy
-
+    @song = current_user.songs.find(params[:id])
+    cu=@song.category_users.find_by_user_id(current_user.id)
+    cu.destroy if cu
+    @song.destroy if @song.category_users.empty?
     respond_to do |format|
       format.html { redirect_to songs_url }
       format.json { head :no_content }

@@ -1,0 +1,26 @@
+<%= form_for @ul, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :titre, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :titre, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :artiste, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :artiste, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :categorie, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.collection_select :category_id, Category.all, :id , :name %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                uploads_path, :class => 'btn' %>
+  </div>
+<% end %>

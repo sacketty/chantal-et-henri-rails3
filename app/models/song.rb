@@ -1,8 +1,8 @@
 class Song < ActiveRecord::Base
   has_many :category_users, :dependent => :destroy
   has_many :categories, :through => :category_users
+  belongs_to :upload
   validates :titre, presence: true
-  validates :key, uniqueness: true
   attr_accessible :titre, :artiste, :url, :category_id, :key
   attr_accessor :category_id, :user
   after_save :set_category
@@ -12,7 +12,7 @@ class Song < ActiveRecord::Base
   end
   
   def s3_url
-    AWS::S3::S3Object.url_for(self.key, BUCKET) if self.key
+    self.upload.s3_url if self.upload
   end
   
 private
