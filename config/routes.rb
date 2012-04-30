@@ -1,5 +1,7 @@
 ChantalEtHenriRails3::Application.routes.draw do
   
+  resources :infos
+
   match "/songs/all", to: "songs#all"
   resources :songs
   resources :s3_uploads

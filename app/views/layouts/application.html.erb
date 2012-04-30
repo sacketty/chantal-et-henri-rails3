@@ -45,6 +45,7 @@
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
 										<ul class="dropdown-menu">
 											<li><a href="/users">Utilisateurs</a></li>
+											<li><a href="/infos">Gestion des news</a></li>
 										</ul>
 									</li>
 									<% end %>
@@ -67,7 +68,16 @@
 			<% if current_user %>
 			<div class="row">
 				<div class="span3">
-					<h3>Les infos...</h3>
+					<div class="well">
+					<h3>Les infos...</h3><br>
+					<% Info.all.each do |info| %>
+						<strong><%= info.subject %></strong>
+						<blockquote>
+							<%= info.text %>
+							<small><%= info.created_at %></small>
+						</blockquote>
+					<% end %>
+					</div>
 				</div>
 				<div class="span9">
 					<%= yield %>

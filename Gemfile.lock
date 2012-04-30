@@ -64,6 +64,7 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.0)
       multipart-post (~> 1.1)
+    forgery (0.5.0)
     hashie (1.2.0)
     hike (1.2.1)
     httpauth (0.1)
@@ -167,6 +168,7 @@ DEPENDENCIES
   aws-s3
   backbone-on-rails
   coffee-rails (~> 3.2.1)
+  forgery
   jquery-rails
   omniauth-facebook
   omniauth-google-oauth2

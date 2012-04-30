@@ -1,4 +1,5 @@
 class Song < ActiveRecord::Base
+  default_scope :order => "updated_at DESC"
   has_many :category_users, :dependent => :destroy
   has_many :categories, :through => :category_users
   belongs_to :upload
