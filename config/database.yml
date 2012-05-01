@@ -15,7 +15,7 @@ test:
   adapter: postgresql
   encoding: utf8
   host: localhost
-  database: wedding-r3_test
+  database: wedding_r3_test
   pool: 5
   username: tester
   password: my_db_password

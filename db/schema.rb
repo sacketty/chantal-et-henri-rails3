@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(:version => 20120430133449) do
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "key"
     t.integer  "upload_id"
   end
 

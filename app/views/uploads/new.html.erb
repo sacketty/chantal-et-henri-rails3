@@ -104,7 +104,7 @@ var readableBytes = function(bytes) {
 	<div id="overall"><span class="progress"><span class="amount">10%</span></span><span id="status"></span></div>
 
 	<%=raw s3_swf_upload_tag(
-		:fileTypes => '*.m4p;*.ogg;*.mp3;*.ac3;',
+		:fileTypes => '*.m4a;*.ogg;*.mp3;*.ac3;',
 	    :fileTypeDescs => 'Audio files.',
 		:onFileNotInQueue => "alert('File not found in the queue');",
 		:onFileSizeLimitReached => "alert('That file is too big');",
