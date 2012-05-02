@@ -1,4 +1,5 @@
 class Upload < ActiveRecord::Base
+  default_scope :order => "updated_at DESC"
   before_destroy :delete_s3
   has_many :songs, :dependent => :destroy
   has_many :categories, :through=>:songs, :dependent => :destroy
