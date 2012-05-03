@@ -9,7 +9,11 @@ class SessionsController < ApplicationController
     if(user.activated)
       redirect_to root_url
     else
-    redirect_to root_url, notice: "Bienvenue, "+user.first_name+". Donnes nous 24 - 48 heures pour activer ton compte"
+      name = user.first_name
+      name ||= user.name
+      puts "--------"
+      puts env["omniauth.auth"].inspect
+      redirect_to root_url, notice: "Bienvenue, "+ name +". Donnes nous 24 - 48 heures pour activer ton compte"
     end
   end
 
