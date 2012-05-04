@@ -3,6 +3,7 @@ ChantalEtHenriRails3::Application.routes.draw do
   resources :infos
 
   match "/songs/all", to: "songs#all"
+  match "/uploads/all", to: "uploads#all"
   resources :songs
   resources :s3_uploads
   resources :uploads

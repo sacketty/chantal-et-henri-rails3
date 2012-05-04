@@ -2,7 +2,12 @@ class UploadsController < ApplicationController
   before_filter :require_login
   
   def index
-    
+    @uploads=current_user.direct_uploads.page(params[:page]).per(8)
+  end
+  
+  def all
+    @uploads=Upload.page(params[:page]).per(8)
+    render action: "index"
   end
 
   # PUT /uploads/1
@@ -14,7 +19,7 @@ class UploadsController < ApplicationController
         format.html do
           @song = current_user.songs.find_by_upload_id(@ul.id)
           if(@song)
-            @song.update_attribute(params[:upload])
+            @song.update_attributes(params[:upload])
           else
             @song = Song.new(params[:upload])
             @song.user = current_user
@@ -42,7 +47,7 @@ class UploadsController < ApplicationController
         format.html # show.html.erb
         format.json { render json: @ul }
       else
-        format.html { redirect_to uploadss_url, alert: 'Requete invalide' }
+        format.html { redirect_to uploads_url, alert: 'Requete invalide' }
         format.json { render json: {}, status: :unprocessable_entity }
       end
     end
@@ -67,6 +72,7 @@ class UploadsController < ApplicationController
   # POST /uploads.json
   def create
     @ul = Upload.new(params[:upload])
+    @ul.added_by = current_user
     @ul.titre = @ul.key
     respond_to do |format|
       if @ul.save

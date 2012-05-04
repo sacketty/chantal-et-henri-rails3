@@ -8,4 +8,4 @@ window.CH =
     Backbone.history.start()
 
 $(document).ready ->
-  CH.init()
+#  CH.init()

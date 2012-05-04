@@ -102,9 +102,12 @@ var readableBytes = function(bytes) {
 	<div id="queue_size"></div>
 
 	<div id="overall"><span class="progress"><span class="amount">10%</span></span><span id="status"></span></div>
-
+	
+	<di>
 	<%=raw s3_swf_upload_tag(
 		:fileTypes => '*.m4a;*.ogg;*.mp3;*.ac3;',
+		:queueSizeLimit  => 12,
+		:fileSizeLimit => 12288000,
 	    :fileTypeDescs => 'Audio files.',
 		:onFileNotInQueue => "alert('File not found in the queue');",
 		:onFileSizeLimitReached => "alert('That file is too big');",
@@ -124,12 +127,43 @@ var readableBytes = function(bytes) {
 		:onUploadComplete => "uploadCompleteHandler(upload_options,event);"
 		
 	) %>
-
-	<div>
-		<input type="submit" id="StartButton" value="Start Uploading" onclick="s3_swf_1_object.startUploading();" />
-		<input type="submit" id="ResetButton" value="Clear Queue" onclick="s3_swf_1_object.clearQueue();" />
-		<input type="submit" id="StopButton" value="Stop Uploading" onclick="s3_swf_1_object.stopUploading();" />
 	</div>
 
+	<div>
+		<input type="submit" id="StartButton" value="Start Uploading" class="btn btn-primary btn-large" onclick="s3_swf_1_object.startUploading();" />
+		<input type="submit" id="ResetButton" value="Clear Queue" class="btn btn-warning btn-large" onclick="s3_swf_1_object.clearQueue();" />
+		<input type="submit" id="StopButton" value="Stop Uploading" class="btn btn-danger btn-large" onclick="s3_swf_1_object.stopUploading();" />
+		<a data-toggle="modal" href="#uploadHelp" class="btn btn-success btn-large">Aide</a>
+	</div>
+
+          <div id="uploadHelp" class="modal hide fade">
+            <div class="modal-header">
+              <button class="close" data-dismiss="modal">&times;</button>
+              <h3>Aide Upload</h3>
+            </div>
+            <div class="modal-body">
+              <h4>1. Browse</h4>
+              <p>cliques sur 'Browse' pour rechercher dans ton ordinateur les morceaux que tu souhaites nous envoyer</p>
+              <p>Tu peux en selectionner plusieurs a la fois (12 au maximum)</p>
+
+              <h4>2. Start uploading</h4>
+              <p>Appuies sur ce bouton pour lancer l'envoi des musiques. La barre de progression devient active. Un message de confirmation apparait lorsque l'operation est terminee</p>
+
+              <h4>3. Ensuite...</h4>
+              <p>Les morceaux apparaissent sur ta <a href="/songs">Playlist</a>.</p>
+              <p>Appuies sur 'edit' pour mettre le titre, l'artiste et le style associes au morceau</p>
+
+              <hr>
+              <h4>Clear queue</h4>
+              <p>Pour effacer tous les titres de la liste.</p>
+
+
+              <h4>Stop uploading</h4>
+              <p>Si tu n'as pas compris..... (la, vraiment,... je suis depasse)</p>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal" >Close</a>
+            </div>
+          </div>
 
 </div>

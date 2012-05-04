@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :category_users, :dependent => :destroy
   has_many :songs, :through => :category_users
   has_many :uploads, :through => :songs
+  has_many :direct_uploads, :class_name => "Upload", :foreign_key=>:added_by_id
 
   def self.from_omniauth(auth)
     find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)

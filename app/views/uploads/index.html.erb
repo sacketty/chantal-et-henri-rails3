@@ -1,4 +1,7 @@
 <%- model_class = Upload.new.class -%>
+
+<%= paginate @uploads %>
+
 <h2>Tous les MP3s</h2><p></p>
 <table class="table table-striped">
   <thead>
@@ -11,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <% Upload.all.each do |ul| %>
+    <% @uploads.each do |ul| %>
       <tr>
         <td><%= link_to ul.id, upload_path(ul) %></td>
         <td><%= ul.titre %></td>
