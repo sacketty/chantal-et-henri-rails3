@@ -30,13 +30,13 @@ class User < ActiveRecord::Base
     self.activated && !self.x_activated
   end
   
-  def self.fake
+  def self.fake(email=nil)
     user = User.new
     fn = Faker::Name
     user.name = fn.name; user.first_name = fn.first_name; user.last_name = fn.last_name
-    user.email = Faker::Internet.email(user.name)
-    UserMailer.registration_request(user).deliver
-    UserMailer.registration_confirmation(user).deliver
+    user.email = email
+    user.email ||= Faker::Internet.email(user.name)
+    puts UserMailer.registration_confirmation(user).deliver
     user
   end
   
