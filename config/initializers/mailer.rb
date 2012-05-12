@@ -4,8 +4,8 @@ class DevelopmentMailInterceptor
     message.to = "sacketty@gmail.com"
   end
 end
-#ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.delivery_method = :sendmail
+ActionMailer::Base.delivery_method = :smtp
+#ActionMailer::Base.delivery_method = :sendmail
 ActionMailer::Base.smtp_settings = {
   :enable_starttls_auto => true,
   :address => "smtp.gmail.com",
