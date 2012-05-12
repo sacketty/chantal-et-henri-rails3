@@ -3,7 +3,7 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
   def index
-    @songs = current_user.songs
+    @songs = current_user.songs.page(params[:page]).per(8)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @songs }
@@ -11,7 +11,7 @@ class SongsController < ApplicationController
   end
   
   def all
-    @songs = Song.all
+    @songs = Song.page(params[:page]).per(8)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @songs }
