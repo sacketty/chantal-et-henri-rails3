@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       if (@user != current_user && @user.update_attributes(params[:user]))
         if @user.newly_activated?
           puts ".......sending confirmation mail"
-          UserMailer.registration_confirmation(@user) 
+          UserMailer.registration_confirmation(@user).deliver
         end
         format.html do
           render action: "index"
