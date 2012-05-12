@@ -27,4 +27,5 @@ gem 'omniauth-google-oauth2'
 gem 'backbone-on-rails'
 
 gem 'forgery', :group=>[:development, :test]
+gem 'faker', :group=>[:development, :test]
 
