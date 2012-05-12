@@ -15,5 +15,5 @@ ActionMailer::Base.smtp_settings = {
   :user_name => "kash.service@abriva.net",
   :password => "_TY65zdTG=09hn"
 }
-ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) #if Rails.env=="development"
+ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env=="development"
 
