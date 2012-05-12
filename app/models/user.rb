@@ -35,9 +35,9 @@ class User < ActiveRecord::Base
     fn = Faker::Name
     user.name = fn.name; user.first_name = fn.first_name; user.last_name = fn.last_name
     user.email = Faker::Internet.email(user.name)
-    puts "#{user.inspect}"
     UserMailer.registration_request(user).deliver
-    UserMailer.registration_confirmation(user)
+    UserMailer.registration_confirmation(user).deliver
+    user
   end
   
 private
