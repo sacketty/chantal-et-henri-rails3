@@ -26,9 +26,11 @@ class UploadsController < ApplicationController
             @song.user = current_user
             @song.upload = @ul
             @song.save
-          end          
+          end
+          redirect_to(session[:return_to] || uploads_path)
+          session[:return_to]=nil
 #          @songs = current_user.songs
-          render action: "show"
+#          render action: "show"
         end
         format.json { head :no_content }
       else
@@ -41,6 +43,7 @@ class UploadsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
+    session[:return_to] = request.referer
     @ul = Upload.find_by_id(params[:id])
 
     respond_to do |format|
