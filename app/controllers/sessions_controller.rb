@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       puts "--------"
       puts env["omniauth.auth"].inspect
       redirect_to root_url, notice: "Bienvenue, "+ name +". Donnes nous 24 - 48 heures pour activer ton compte"
+      UserMailer.registration_request(user).deliver
     end
   end
 

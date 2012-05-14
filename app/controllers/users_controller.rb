@@ -19,6 +19,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     respond_to do |format|
       if (@user != current_user && @user.update_attributes(params[:user]))
+        if @user.newly_activated?
+          puts ".......sending confirmation mail"
+          UserMailer.registration_confirmation(@user).deliver
+        end
         format.html do
           render action: "index"
         end
