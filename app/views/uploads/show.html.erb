@@ -8,7 +8,6 @@
   <strong><%= model_class.human_attribute_name(:artiste) %>:</strong><br>
   <%= @ul.artiste %>
 </p>
-
 <p>
   <strong><%= model_class.human_attribute_name(:categories) %>:</strong><br>
   <%= @ul.category_list %>
@@ -16,6 +15,26 @@
 <p>
   <strong><%= model_class.human_attribute_name(:url) %>:</strong><br>
   <a href='<%= @ul.s3_url %>'>Télécharger</a>
+</p>
+<p>
+  <div id='mediaplayer_<%= @ul.id%>'></div>
+  <script type="text/javascript">
+				jwplayer('mediaplayer_<%= @ul.id %>').setup({
+					'flashplayer': '/assets/jwplayer/player.swf',
+					'id': 'playerID_<%=@ul.id %>',
+					'width': '280',
+					'height': '96',
+					'file': '<%= @ul.s3_url %>',
+    'author': '<%= @ul.artiste %>',
+    'description': '<%= "Artiste: "+@ul.artiste if @ul.artiste %>\n<%= "Uploaded by: "+@ul.added_by.name if @ul.added_by %>',
+//    'image': 'http://www.longtailvideo.com/jw/upload/bunny.jpg',
+    'title': '<%= @ul.titre %>',
+    'playlistsize': '2',
+//    'skin': 'http://developer.longtailvideo.com/svn/skins/beelden/beelden.zip',
+    'playlist': 'over',
+    'controlbar': 'bottom'
+				});
+  </script>
 </p>
 
 <div class="form-actions">
