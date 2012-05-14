@@ -2,7 +2,7 @@
 
 <%= paginate @uploads %>
 
-<h2>Tous les MP3s</h2><p></p>
+<h2>Tous <%= @who.nil? ? "mes" : @who %> MP3s</h2><p></p>
 <table class="table table-striped">
   <thead>
     <tr>

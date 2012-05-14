@@ -6,6 +6,7 @@ class UploadsController < ApplicationController
   end
   
   def all
+    @who = "les"
     @uploads=Upload.page(params[:page]).per(8)
     render action: "index"
   end
