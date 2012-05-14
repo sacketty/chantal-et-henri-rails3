@@ -26,8 +26,8 @@ class UploadsController < ApplicationController
             @song.upload = @ul
             @song.save
           end          
-          @songs = current_user.songs
-          render action: "index"
+#          @songs = current_user.songs
+          render action: "show"
         end
         format.json { head :no_content }
       else
