@@ -8,15 +8,8 @@
 				</div>
 				<h2>Bienvenue, <strong><%= current_user.first_name %></strong></h2>
 				<p class="tagline">Merci de nous aider à préparer la soirée.</p>
-				<p class="tagline"><a href="/songs">Vas sur le gestionnaire 'Musique' si tu souhaites danser sur des morceaux particuliers</a></p>
-				<h4>Les liens</h4>
-				<dl>
-					<dt><a href="/songs">Playlist</a></dt>
-					<dd>Pour entrer les titres que tu souhaites entendre au cours de la soirée<p></dd>
-					<dt><a href="/uploads/new">Uploader</a></dt>
-					<dd>Si tu as des 'mp3' que tu souhaites nous envoyer...<p></dd>
-				</dl>
 			</div>
+			<%= render :partial => 'home' %>
 	<% else %>
 	<div class="hero-unit">
 		<h1>Chantal et Henri</h1>
