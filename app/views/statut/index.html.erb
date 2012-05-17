@@ -1,5 +1,7 @@
 <%- model_class = @statut.class -%>
 <h2><%=t '.title', :default => "Ta participation:" %></h2>
+<p>Cliques sur <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_statut_path(@statut) %> pour changer les valeurs</p>
 <p>
 <table class="table table-bordered table-striped">
 	<tr>
