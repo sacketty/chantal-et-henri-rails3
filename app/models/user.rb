@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :admin, :activated
   attr_accessor :x_activated
   has_many :category_users, :dependent => :destroy
+  has_one  :statut
   has_many :songs, :through => :category_users
   has_many :uploads, :through => :songs
   has_many :direct_uploads, :class_name => "Upload", :foreign_key=>:added_by_id
@@ -38,6 +39,10 @@ class User < ActiveRecord::Base
     user.email ||= Faker::Internet.email(user.name)
     puts UserMailer.registration_confirmation(user).deliver
     user
+  end
+  
+  def get_statut
+    self.statut ||= self.create_statut
   end
   
 private

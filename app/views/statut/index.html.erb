@@ -1,0 +1,29 @@
+<%- model_class = @statut.class -%>
+<h2><%=t '.title', :default => "Ta participation:" %></h2>
+<p>
+<table class="table table-bordered table-striped">
+	<tr>
+		<th>Nombre de personnes à la mairie</th>
+		<td><%= @statut.mairie %></td>
+	</tr>
+	<tr>
+		<th>Nombre de personnes à la soirée</th>
+		<td><%= @statut.diner %></td>
+	</tr>
+	<tr>
+		<th>Nombre de chambres sollicitées</th>
+		<td><%= @statut.chambre %></td>
+	</tr>
+</table>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              root_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_statut_path(@statut), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              statut_path(@statut),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>

@@ -1,5 +1,7 @@
 ChantalEtHenriRails3::Application.routes.draw do
   
+  resources :statut
+
   resources :infos
 
   match "/songs/all", to: "songs#all"

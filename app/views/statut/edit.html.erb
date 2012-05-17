@@ -1,0 +1,5 @@
+<%- model_class = @statut.class -%>
+<h2><%=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
+                                 :default => "Infos sur ta participation:") %></h2>
+                                 <p/>
+<%= render :partial => 'form' %>

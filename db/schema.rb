@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504064216) do
+ActiveRecord::Schema.define(:version => 20120517085708) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120504064216) do
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "key"
     t.integer  "upload_id"
   end
 
@@ -55,6 +56,24 @@ ActiveRecord::Schema.define(:version => 20120504064216) do
 
   add_index "songs_users", ["song_id"], :name => "index_songs_users_on_song_id"
   add_index "songs_users", ["user_id"], :name => "index_songs_users_on_user_id"
+
+  create_table "statuses", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "mairie"
+    t.integer  "diner"
+    t.integer  "chambre"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "statuts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "mairie"
+    t.integer  "diner"
+    t.integer  "chambre"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "uploads", :force => true do |t|
     t.string   "key"

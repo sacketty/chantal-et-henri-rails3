@@ -1,0 +1,30 @@
+<%= form_for @statut, :html => { :class => 'form-horizontal' } do |f| %>
+  <table class="table table-bordered table-striped">
+  	<thead>
+  	  <tr>
+  		<td scope="2">Indiques le nombre de personnes au total si:</td>
+  	  </tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td><%= f.label "Tu viens a la mairie" %></td>
+  			<td><%= f.number_field :mairie, :class => 'number_field' %></td>
+  		</tr>
+  		<tr>
+  			<td><%= f.label "Tu viens à la soirée" %></td>
+  			<td><%= f.number_field :diner, :class => 'number_field' %></div>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td><%= f.label "Tu souhaites réserver des chambres " %></td>
+  			<td><%= f.number_field :chambre, :class => 'number_field' %></td>
+  		</tr>
+  	</tbody>
+  </table>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                statut_path, :class => 'btn' %>
+  </div>
+<% end %>
