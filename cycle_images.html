@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+
+<base href="http://miccs.squarespace.com/storage/">
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="language" content="english"> 
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+
+<title></title>
+
+<script type="text/javascript">
+
+   var temp;
+   var time=3000;
+   var pics=[
+             'logo_ermco.gif','Delta2copy.gif','AceAir2.1.gif','Wilhelm2.gif',
+             'Santarossa2.gif','Trinity2.gif','Ryan2.gif','RMS2.gif',
+             'Premier2.gif','Pepper2.gif','PCG2.gif','Milestone2.gif',
+             'Laceindy2.gif','Frakes2.gif','logo_ermco.gif','MJS.gif'
+            ];
+
+function  init() {
+
+    num=Math.floor(Math.random()*pics.length); 
+    temp=num;
+
+    el=document.createElement('img');  
+    el.setAttribute('src',pics[num]);
+    el.setAttribute('id','myimg');
+
+   document.getElementById('img_holder').appendChild(el);
+
+   setTimeout(function(){rotateImage(temp)},time);
+ }
+
+function rotateImage(temp){
+
+   num=Math.floor(Math.random()*pics.length);
+if(num==temp) {
+   rotateImage(temp);
+ }
+else {
+   temp=num; 
+   document.getElementById('myimg').src=pics[num];
+   setTimeout(function(){rotateImage(temp)},time);
+  }
+ }
+
+if(window.addEventListener){
+   window.addEventListener('load',init,false);
+ }
+else { 
+if(window.attachEvent){
+   window.attachEvent('onload',init);
+  }
+ }
+</script>
+
+</head>
+<body>
+  
+<div id="img_holder"></div>
+
+</body>
+</html>
