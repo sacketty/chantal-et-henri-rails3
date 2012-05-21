@@ -1,6 +1,7 @@
 ChantalEtHenriRails3::Application.routes.draw do
   
   resources :statut
+  resources :statuts
 
   resources :infos
 

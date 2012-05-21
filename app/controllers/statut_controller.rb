@@ -6,7 +6,7 @@ class StatutController < ApplicationController
   # GET /statuts/1
   # GET /statuts/1.json
   def index
-    @statut = current_user.get_statut
+    @statut = get_statut
 
     respond_to do |format|
       format.html # show.html.erb
@@ -17,18 +17,18 @@ class StatutController < ApplicationController
   # GET /statuts/1/edit
   def edit
     session[:return_to] = request.referer
-    @statut = current_user.get_statut
+    @statut = get_statut
   end
   
   def show
-    @statut = current_user.get_statut
+    @statut = get_statut
     render "index"
   end
 
   # PUT /statuts/1
   # PUT /statuts/1.json
   def update
-    @statut = current_user.get_statut
+    @statut = get_statut
 
     respond_to do |format|
       if @statut.update_attributes(params[:statut])
@@ -45,11 +45,11 @@ puts "status = #{@statut.inspect}"
   # DELETE /statuts/1
   # DELETE /statuts/1.json
   def destroy
-    @statut = current_user.get_statut
+    @statut = current_user.statut
     @statut.destroy
 
     respond_to do |format|
-      format.html { redirect_to statut_url }
+      format.html { redirect_to root_url }
       format.json { head :no_content }
     end
   end

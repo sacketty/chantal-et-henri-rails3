@@ -3,6 +3,7 @@
 <p>Cliques sur <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_statut_path(@statut) %> pour changer les valeurs</p>
 <p>
+<p><h3><%= @statut.user.name%></h3></p>
 <table class="table table-bordered table-striped">
 	<tr>
 		<th>Nombre de personnes à la mairie</th>

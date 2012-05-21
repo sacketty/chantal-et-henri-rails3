@@ -10,6 +10,10 @@ private
     @current_user ||= User.find_by_id_and_activated(session[:user_id], true) if session[:user_id]
   end
   
+  def get_statut
+    @status_admin ? current_user.statut : current_user.get_statut
+  end
+  
   def categories
     Categories.all
   end

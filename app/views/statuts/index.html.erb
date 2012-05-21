@@ -1,0 +1,45 @@
+# encoding: UTF-8
+<%- model_class = Statut.new.class -%>
+
+<%= paginate @statuts %>
+
+<h2>Liste de pr&eacute;sence</h2><p></p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Mairie</th>
+      <th>Soir&eacute;e</th>
+      <th>Chambres</>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+    <tr>
+      <th>Total:</th>
+      <th><%= Statut.sum(:mairie) %></th>
+      <th><%= Statut.sum(:diner) %></th>
+      <th><%= Statut.sum(:chambre) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @statuts.each do |statut| %>
+      <tr>
+        <td><%= link_to statut.user.name, statut_path(statut) %></td>
+        <td><%= statut.mairie %></td>
+        <td><%= statut.diner %></td>
+        <td><%= statut.chambre %></td>
+        </td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_statut_path(statut), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      statut_path(statut),
+                      :method => :delete,
+                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
