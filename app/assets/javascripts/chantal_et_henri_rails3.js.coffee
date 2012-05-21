@@ -24,7 +24,6 @@ window.CH =
     console.log "this is the test function"
   showImage: (img) ->
     src = "/assets/cycle/#{img}"
-    console.log "Showing image -> #{src}"
     $("#img_holder").html("<img src='#{src}' alt=''/>")
   rotateImage: ->
     num=Math.floor(Math.random()*CH.pics.length);
