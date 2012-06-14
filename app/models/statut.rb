@@ -20,6 +20,7 @@ class Statut < ActiveRecord::Base
 private
   
   def set_reservation_status
+    return unless self.user
     self.singles = user.singles.count
     self.doubles = user.doubles.count
   end

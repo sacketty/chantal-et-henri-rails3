@@ -25,6 +25,16 @@ namespace :ch do
     end
   end
   
+  desc 'remove statuts orphans'
+  task :clean => :environment do
+    Statut.all.each do |st|
+      unless st.user
+        puts "destroying statut##{st.id}"
+        st.destroy
+      end
+    end
+  end
+  
   desc 'test rake'
   task :test  => :environment do
     puts Category.all.inspect

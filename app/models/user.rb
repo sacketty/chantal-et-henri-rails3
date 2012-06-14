@@ -2,14 +2,13 @@ class User < ActiveRecord::Base
   attr_accessible :admin, :activated
   attr_accessor :x_activated, :mairie, :diner
   has_many :category_users, :dependent => :destroy
-  has_one  :statut
+  has_one  :statut, :dependent => :destroy
   has_many :presences, :through => :guests do
     def at(lieu)
       find(:all, :conditions=>"\"presences\".\"#{lieu}\" IS TRUE")
     end
   end
-  has_one  :presence do
-  end
+  has_one  :presence, :dependent => :destroy
   has_many :songs, :through => :category_users
   has_many :rooms
   has_many :singles, :class_name=>"Room::Single"
