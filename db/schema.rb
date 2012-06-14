@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517085708) do
+ActiveRecord::Schema.define(:version => 20120614062118) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(:version => 20120517085708) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "liste_mariages", :force => true do |t|
+    t.string   "article"
+    t.boolean  "taken"
+    t.integer  "taken_by_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "liste_mariages", ["taken_by_id"], :name => "index_liste_mariages_on_taken_by_id"
 
   create_table "songs", :force => true do |t|
     t.integer  "uid"

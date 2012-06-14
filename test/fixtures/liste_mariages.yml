@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  article: MyString
+  taken: false
+  taken_by: 
+
+two:
+  article: MyString
+  taken: false
+  taken_by: 

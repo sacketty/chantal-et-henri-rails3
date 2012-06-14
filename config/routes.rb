@@ -1,5 +1,7 @@
 ChantalEtHenriRails3::Application.routes.draw do
   
+#  resources :liste_mariages
+
   resources :statut
   resources :statuts
 
