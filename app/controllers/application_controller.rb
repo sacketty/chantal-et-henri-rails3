@@ -9,8 +9,10 @@ private
 #    @current_user ||= User.find(session[:user_id]) if session[:user_id]
     return @current_user if @current_user
     @current_user = User.find_by_id_and_activated(session[:user_id], true) if session[:user_id]
-    @current_user.guests.create(name: @current_user.name, myself: true) unless @current_user.guests.myself
-    @current_user
+    if( @current_user)
+      @current_user.guests.create(name: @current_user.name, myself: true) unless @current_user.guests.myself
+      @current_user
+    end
   end
   
   def get_statut
