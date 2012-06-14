@@ -1,6 +1,6 @@
 <%- model_class = @statut.class -%>
 <h2><%=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
-                                 :default => "Infos sur ta reservation") %></h2>
+                                 :default => "Reservation chambres") %></h2>
                                  <p/>
 <p><h3><%= @statut.user.name%></h3></p>
 <%= render :partial => 'form' %>

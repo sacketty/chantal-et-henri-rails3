@@ -1,0 +1,29 @@
+<%= form_for @statut, :url=>"/statuts/#{@statut.id}", :html => { :class => 'form-horizontal' } do |f| %>
+  <table class="table table-bordered table-striped">
+  	<thead>
+  	  <tr>
+  	  	<th></th>
+  		<th>reservees</th>
+  		<th>confirmees</th>
+  	  </tr>
+  	</thead>
+  	<tbody>  		
+  		<tr>
+  			<th>Chambres simples</th>
+  			<td><%= @statut.chambre %></td>
+  			<td><%= f.number_field :singles, :class => 'number_field' %></td>
+  		</tr>
+  		<tr>
+  			<th>Chambres doubles</th>
+  			<td><%= @statut.chambre2 %></td>
+  			<td><%= f.number_field :doubles, :class => 'number_field' %></td>
+  		</tr>
+  	</tbody>
+  </table>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                "/statuts", :class => 'btn' %>
+  </div>
+<% end %>

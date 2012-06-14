@@ -1,12 +1,16 @@
 ChantalEtHenriRails3::Application.routes.draw do
   
+  resources :rooms
+
 #  resources :liste_mariages
 
   resources :statut
   resources :statuts
+  resources :guests
 
   resources :infos
-
+  match 'statuts/:id', to: "statuts#edit", as: :edit_statuts
+  
   match "/songs/all", to: "songs#all"
   match "/uploads/all", to: "uploads#all"
   resources :songs

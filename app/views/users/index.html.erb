@@ -12,12 +12,18 @@
     </tr>
   </thead>
   <tbody>
-    <% User.all.each do |user| %>
+    <% User.no_double.each do |user| %>
       <tr>
         <td><%= link_to user.id, user_path(user) %></td>
         <td><%= user.name %></td>
         <td><%= user.provider %></td>
-        <td><%= user.email %></td>
+        <td>
+        	<% if user.is_a?(Guest) %>
+        		<%= user.invited_by.name %>
+        	<% else%>
+        		<%= user.email %>
+        	<% end %>
+        </td>
         <% if user.activated %>
         	<% if user.admin %>
         		<td><span class="label label-info">Administrateur</span></td>
@@ -25,11 +31,17 @@
         		<td><code>Actif</code></td>
         	<% end %>
         <% else %>
-        	<td>Non activé</td>
+        	<% if user.is_a?(Guest)%>
+        		<td><span class="label">invité</span></td>
+        	<% else %>
+        		<td>Non activé</td>
+        	<% end %>
         <% end %>
         <td>
+          <% unless user.is_a?(Guest) %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_user_path(user), :class => 'btn btn-mini' %>
+          <% end %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       user_path(user),
                       :method => :delete,

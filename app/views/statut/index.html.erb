@@ -14,8 +14,20 @@
 		<td><%= @statut.diner %></td>
 	</tr>
 	<tr>
-		<th>Nombre de chambres sollicitées</th>
+		<th>Nombre de chambres simples sollicitées</th>
 		<td><%= @statut.chambre %></td>
+	</tr>
+	<tr>
+		<th>Nombre de chambres simples confirmées</th>
+		<td><%= @statut.user.singles.count %></td>
+	</tr>
+	<tr>
+		<th>Nombre de chambres doubles sollicitées</th>
+		<td><%= @statut.chambre2 %></td>
+	</tr>
+	<tr>
+		<th>Nombre de chambres doubles confirmées</th>
+		<td><%= @statut.user.doubles.count %></td>
 	</tr>
 </table>
 

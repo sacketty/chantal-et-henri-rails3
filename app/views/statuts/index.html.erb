@@ -10,14 +10,16 @@
       <th>Nom</th>
       <th>Mairie</th>
       <th>Soir&eacute;e</th>
-      <th>Chambres</>
+      <th>Ch S</>
+      <th>Ch D</>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
     <tr>
       <th>Total:</th>
       <th><%= Statut.sum(:mairie) %></th>
       <th><%= Statut.sum(:diner) %></th>
-      <th><%= Statut.sum(:chambre) %></th>
+      <th><%= "#{Statut.sum(:chambre)} / #{Room::Single.count}" %></th>
+      <th><%= "#{Statut.sum(:chambre2)} / #{Room::Double.count}" %></th>
       <th></th>
     </tr>
   </thead>
@@ -27,11 +29,11 @@
         <td><%= link_to statut.user.name, statut_path(statut) %></td>
         <td><%= statut.mairie %></td>
         <td><%= statut.diner %></td>
-        <td><%= statut.chambre %></td>
-        </td>
+        <td><%= "#{statut.chambre} / #{statut.user.singles.count}" %></td>
+        <td><%= "#{statut.chambre2} / #{statut.user.doubles.count}" %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_statut_path(statut), :class => 'btn btn-mini' %>
+                      edit_statuts_path(statut), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       statut_path(statut),
                       :method => :delete,

@@ -32,7 +32,6 @@ class StatutController < ApplicationController
 
     respond_to do |format|
       if @statut.update_attributes(params[:statut])
-puts "status = #{@statut.inspect}"
         format.html { redirect_to @statut, notice: 'Statut was successfully updated.' }
         format.json { head :no_content }
       else
@@ -45,9 +44,8 @@ puts "status = #{@statut.inspect}"
   # DELETE /statuts/1
   # DELETE /statuts/1.json
   def destroy
-    @statut = current_user.statut
-    @statut.destroy
-
+    @statut = Statut.find(params[:id])
+    @statut.destroy if ((@statut.user_id == current_user.id) || current_user.admin)
     respond_to do |format|
       format.html { redirect_to root_url }
       format.json { head :no_content }

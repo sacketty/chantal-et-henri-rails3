@@ -1,13 +1,27 @@
 class User < ActiveRecord::Base
   attr_accessible :admin, :activated
-  attr_accessor :x_activated
+  attr_accessor :x_activated, :mairie, :diner
   has_many :category_users, :dependent => :destroy
   has_one  :statut
+  has_one  :presence
   has_many :songs, :through => :category_users
+  has_many :rooms
+  has_many :singles, :class_name=>"Room::Single"
+  has_many :doubles, :class_name=>"Room::Double"
+  belongs_to :room
+  has_many :guests, :foreign_key=>:invited_by_id do
+    def myself
+      find(:first, :conditions=>'myself IS TRUE')      
+    end
+  end
   has_many :uploads, :through => :songs
   has_many :direct_uploads, :class_name => "Upload", :foreign_key=>:added_by_id
   after_initialize :set_initial_values
+  after_save :set_presence
   
+  def self.no_double
+    find(:all, :conditions=>'myself IS NOT TRUE')
+  end
 
   def self.from_omniauth(auth)
     find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
@@ -45,7 +59,24 @@ class User < ActiveRecord::Base
     self.statut ||= self.create_statut
   end
   
+  def at_mairie?
+    return false unless presence
+    presence.mairie
+  end
+  
+  def at_diner?
+    return false unless presence
+    presence.diner
+  end
+  
 private
+
+  def set_presence
+    self.presence ||= self.build_presence
+    self.presence.mairie = ( self.mairie=="1" )
+    self.presence.diner = ( self.diner=="1" )
+    self.presence.save
+  end
   
   def set_initial_values
     self.x_activated = self.activated

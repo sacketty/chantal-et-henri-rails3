@@ -1,0 +1,35 @@
+<%= form_for @guest, :html => { :class => 'form-horizontal' } do |f| %>
+  <% @guest.mairie = true if @guest.at_mairie? %>
+  <% @guest.diner = true if @guest.at_diner? %>
+  <div class="control-group">
+    <%= f.label "Nom", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Presence", :class => 'control-label' %>
+    <div class="controls">
+      <label class="checkbox">
+      	<%= f.check_box :mairie, :class => 'checkbox' %>
+      	&agrave; la mairie
+      </label>
+      <label class="checkbox">
+      	<%= f.check_box :diner, :class => 'checkbox' %>
+      	&agrave; la soir&eacute;e
+      </label>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Hebergement", :class => 'control-label' %>
+    <div class="controls">
+    	<%= f.select("room_id", current_user.rooms.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'})%>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                guests_path, :class => 'btn' %>
+  </div>
+<% end %>

@@ -1,23 +1,18 @@
 <%= form_for @statut, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <p><a href="/guests">vas sur <b>'Mes invit&eacute;s'</b> pour nous informer des personnes avec lesquelles tu viens</a></p>
+  <p><b>D&eacute;tails de ta r&eacute;servation:</b></p>
   <table class="table table-bordered table-striped">
   	<thead>
   	  <tr>
-  		<td scope="2">Indiques le nombre de personnes au total si:</td>
+  		<td><%= f.label "Chambre simple" %></td>
+  		<td><%= f.label "Chambre double" %></td>
   	  </tr>
   	</thead>
   	<tbody>
   		<tr>
-  			<td><%= f.label "Tu viens a la mairie" %></td>
-  			<td><%= f.number_field :mairie, :class => 'number_field' %></td>
-  		</tr>
-  		<tr>
-  			<td><%= f.label "Tu viens à la soirée" %></td>
-  			<td><%= f.number_field :diner, :class => 'number_field' %></div>
-  			</td>
-  		</tr>
-  		<tr>
-  			<td><%= f.label "Tu souhaites réserver des chambres " %></td>
   			<td><%= f.number_field :chambre, :class => 'number_field' %></td>
+  			<td><%= f.number_field :chambre2, :class => 'number_field' %></td>
   		</tr>
   	</tbody>
   </table>

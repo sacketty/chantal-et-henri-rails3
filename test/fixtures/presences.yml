@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  mairie: false
+  diner: false
+
+two:
+  user: 
+  mairie: false
+  diner: false
