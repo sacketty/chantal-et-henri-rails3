@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_filter :require_admin
   # GET /rooms
   # GET /rooms.json
   def index

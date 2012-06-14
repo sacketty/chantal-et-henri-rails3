@@ -21,4 +21,15 @@ class UserMailer < ActionMailer::Base
       subject: "Activation du compte sur le site Chantal et Henri"
     )
   end
+  
+  def reservation_confirmation(user)
+    @user = user
+    mail(
+      from: "chantalethenri@abriva.net", 
+      to: user.email, 
+      return_path: "chantalethenri@abriva.net",
+      reply_to: "chantalethenri@abriva.net",
+      subject: "Reservation chambres au chateau"
+    )
+  end
 end

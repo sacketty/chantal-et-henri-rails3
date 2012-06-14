@@ -7,11 +7,11 @@
 <table class="table table-bordered table-striped">
 	<tr>
 		<th>Nombre de personnes à la mairie</th>
-		<td><%= @statut.mairie %></td>
+		<td><%= @statut.user.presences.at('mairie').count %></td>
 	</tr>
 	<tr>
 		<th>Nombre de personnes à la soirée</th>
-		<td><%= @statut.diner %></td>
+		<td><%= @statut.user.presences.at("diner").count %></td>
 	</tr>
 	<tr>
 		<th>Nombre de chambres simples sollicitées</th>

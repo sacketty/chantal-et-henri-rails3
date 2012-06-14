@@ -26,6 +26,7 @@ class StatutsController < ApplicationController
       render :edit
     else
       Room.update_quantity(@statut)
+      UserMailer.reservation_confirmation(@statut.user).deliver
       flash[:notice] = "Total Chambres doubles: #{Room::Double.count} | Total Chambres single #{Room::Single.count}"
       render :edit
     end
