@@ -6,7 +6,7 @@ class GuestsController < ApplicationController
   end
   
   def show
-    @guest = params[:id].to_i == current_user.id ? current_user : current_user.guests.find(params[:id])
+    @guest = User.find(params[:id])
   end
   
 

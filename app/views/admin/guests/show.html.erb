@@ -1,0 +1,28 @@
+<%- model_class = @guest.class -%>
+<h2>Profil de <%= @guest.name%></h2>
+<p>
+  <strong>Invité par:</strong><br>
+  <%= @guest.invited_by.name%>
+</p>
+<% if @guest.presence.mairie %>
+<p>
+  <strong>Présent a la mairie</strong><br>
+</p>
+<% end %>
+<% if @guest.presence.diner %>
+<p>
+  <strong>Présent a la soirée</strong><br>
+</p>
+<% end %>
+
+
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              admin_guests_path, :class => 'btn'  %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              admin_guest_path(@guest),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>

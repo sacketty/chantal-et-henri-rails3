@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
   end
   has_one  :presence, :dependent => :destroy
   has_many :songs, :through => :category_users
-  has_many :rooms
+  has_many :rooms, :dependent => :destroy
   has_many :singles, :class_name=>"Room::Single"
   has_many :doubles, :class_name=>"Room::Double"
   belongs_to :room
-  has_many :guests, :foreign_key=>:invited_by_id do
+  has_many :guests, :foreign_key=>:invited_by_id, :dependent => :destroy do
     def myself
       find(:first, :conditions=>'myself IS TRUE')      
     end
