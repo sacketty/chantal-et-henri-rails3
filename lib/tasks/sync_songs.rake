@@ -35,6 +35,16 @@ namespace :ch do
     end
   end
   
+  desc 'create guests for users'
+  task :guests => :environment do
+    User.no_guests.each do |u|
+      unless u.guests.myself
+        puts "create guest for #{u.name}"
+        u.send(:make_guest)
+      end
+    end
+  end
+  
   desc 'test rake'
   task :test  => :environment do
     puts Category.all.inspect

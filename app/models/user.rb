@@ -23,6 +23,9 @@ class User < ActiveRecord::Base
   has_many :direct_uploads, :class_name => "Upload", :foreign_key=>:added_by_id
   after_initialize :set_initial_values
   after_save :set_presence
+  after_create :make_guest
+  
+  validates_presence_of :name
   
   def self.no_guests
     find(:all, :conditions=>'type IS NULL')
@@ -81,6 +84,10 @@ private
     self.presence.mairie = ( self.mairie=="1" )
     self.presence.diner = ( self.diner=="1" )
     self.presence.save
+  end
+  
+  def make_guest
+    self.guests.create(name: self.name, myself: true)
   end
   
   def set_initial_values

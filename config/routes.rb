@@ -1,6 +1,10 @@
 ChantalEtHenriRails3::Application.routes.draw do
   
   resources :rooms
+  
+  namespace :admin do
+    resources :guests
+  end
 
 #  resources :liste_mariages
 
