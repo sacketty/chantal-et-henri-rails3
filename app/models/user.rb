@@ -24,8 +24,8 @@ class User < ActiveRecord::Base
   after_initialize :set_initial_values
   after_save :set_presence
   
-  def self.no_double
-    find(:all, :conditions=>'myself IS NOT TRUE')
+  def self.no_guests
+    find(:all, :conditions=>'type IS NULL')
   end
 
   def self.from_omniauth(auth)

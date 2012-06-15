@@ -12,18 +12,12 @@
     </tr>
   </thead>
   <tbody>
-    <% User.no_double.each do |user| %>
+    <% User.no_guests.each do |user| %>
       <tr>
         <td><%= link_to user.id, user_path(user) %></td>
         <td><%= user.name %></td>
         <td><%= user.provider %></td>
-        <td>
-        	<% if user.is_a?(Guest) %>
-        		<%= user.invited_by.name %>
-        	<% else%>
-        		<%= user.email %>
-        	<% end %>
-        </td>
+        <td><%= user.email %></td>
         <% if user.activated %>
         	<% if user.admin %>
         		<td><span class="label label-info">Administrateur</span></td>
