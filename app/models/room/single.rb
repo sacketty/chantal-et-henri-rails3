@@ -5,6 +5,10 @@ class Room::Single < Room
     MAX
   end
   
+  def places
+    2
+  end
+  
   def name
     "ref:#{self.id} - simple"
   end

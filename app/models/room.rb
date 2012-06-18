@@ -1,5 +1,6 @@
 class Room < ActiveRecord::Base
   belongs_to :user
+  has_many :guests
   attr_accessible :number, :places
   before_validation(:on=>:create) {check_max}
   
@@ -21,6 +22,10 @@ class Room < ActiveRecord::Base
       (1..qty).each { |i| @ch = user.send(attr).create!}
     end
     statut
+  end
+  
+  def places
+    4
   end
   
   def check_max

@@ -50,7 +50,7 @@ class GuestsController < ApplicationController
         end
         format.json { head :no_content }
       else
-        msg = 'Requete invalide\n' + @guest.errors.full_messages
+        msg = "Requete invalide: #{@guest.errors.full_messages}"
         format.html { redirect_to guests_url, alert: msg }
         format.json { render json: @guest.errors, status: :unprocessable_entity }
       end
