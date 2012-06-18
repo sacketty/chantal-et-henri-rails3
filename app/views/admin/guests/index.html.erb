@@ -15,7 +15,7 @@
     <% Guest.all.each do |guest| %>
       <tr>
         <td><%= guest.name %></td>
-        <td><%= guest.invited_by.name if guest.invited_by %></td>
+        <td><%= guest.invited_by ? guest.invited_by.name : "" %></td>
         <td><% if guest.at_mairie?%><i class="icon-ok"/><% end %></td>
         <td><% if guest.at_diner?%><i class="icon-ok"/><% end %></td>
         <td><% if guest.room %><%= guest.room.name %><% end %></td>

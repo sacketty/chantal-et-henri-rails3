@@ -32,4 +32,17 @@ class UserMailer < ActionMailer::Base
       subject: "Reservation chambres au chateau"
     )
   end
+  
+  def send_email(email)
+    @email = email
+    mail(
+      from: "chantalethenri@abriva.net", 
+      to: email.to.email,
+      cc: "chantalethenri@abriva.net, #{email.cc}",
+      cci: email.cci, 
+      return_path: "chantalethenri@abriva.net",
+      reply_to: "chantalethenri@abriva.net",
+      subject: email.subject
+    )
+  end
 end
