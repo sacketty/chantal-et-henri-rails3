@@ -3,8 +3,8 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <th>Invit&eacute; par</th>
       <th>Mairie</th>
       <th>Diner</th>
       <th>Chambre</th>
@@ -14,8 +14,8 @@
   <tbody>
     <% Guest.all.each do |guest| %>
       <tr>
-        <td><%= link_to guest.id, admin_guest_path(guest) %></td>
         <td><%= guest.name %></td>
+        <td><%= guest.invited_by.name if guest.invited_by %></td>
         <td><% if guest.at_mairie?%><i class="icon-ok"/><% end %></td>
         <td><% if guest.at_diner?%><i class="icon-ok"/><% end %></td>
         <td><% if guest.room %><%= guest.room.name %><% end %></td>
