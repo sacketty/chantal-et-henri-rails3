@@ -7,6 +7,9 @@ ChantalEtHenriRails3::Application.routes.draw do
   resources :statut
   resources :statuts
   resources :guests
+  namespace :admin do
+    resources :guests
+  end
 
   resources :infos
   match 'statuts/:id', to: "statuts#edit", as: :edit_statuts
