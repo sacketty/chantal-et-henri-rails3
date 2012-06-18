@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   end
   has_one  :presence, :dependent => :destroy
   has_many :songs, :through => :category_users
+  has_many :emails, :foreign_key=>:to_id
   has_many :rooms
   has_many :singles, :class_name=>"Room::Single"
   has_many :doubles, :class_name=>"Room::Double"
