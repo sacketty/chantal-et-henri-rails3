@@ -3,6 +3,8 @@ class GuestsController < ApplicationController
   before_filter :require_admin
 
   def index
+    scope = params[:join] ? Guest.joins(params[:join]).order("#{params[:join]}.#{params[:sort]}") : Guest.order(params[:sort])
+    @guests=scope.search(params[:search]).page(params[:page]).per(10)
   end
   
   def show

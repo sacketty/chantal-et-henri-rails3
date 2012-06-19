@@ -1,10 +1,22 @@
 <%- model_class = User.new.class -%>
+
+<%= paginate @guests %>
+
 <h1>Les invit&eacute;s</h1><p></p>
+<%= form_tag admin_guests_path, method: :get do %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Chercher", name: nil %>
+  </p>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th>Invit&eacute; par</th>
+      <th><%= sortable :name %></th>
+      <th><%= "Invité par" %></th>
       <th>Mairie</th>
       <th>Diner</th>
       <th>Chambre</th>
@@ -12,7 +24,7 @@
     </tr>
   </thead>
   <tbody>
-    <% Guest.all.each do |guest| %>
+    <% for guest in @guests %>
       <tr>
         <td><%= guest.name %></td>
         <td><%= guest.invited_by ? guest.invited_by.name : "" %></td>

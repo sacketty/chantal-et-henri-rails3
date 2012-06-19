@@ -1,7 +1,12 @@
 class Room::Double < Room
-  MAX=5
+  MAX=12
+  PLACES=3
   def max
     MAX
+  end
+  
+  def places
+    PLACES
   end
   
   def name

@@ -1,12 +1,13 @@
 class Room::Single < Room
-  MAX=25
+  MAX=18
+  PLACES=2
   
   def max
     MAX
   end
   
   def places
-    2
+    PLACES
   end
   
   def name
