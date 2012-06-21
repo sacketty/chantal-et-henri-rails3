@@ -13,10 +13,10 @@ class GuestsController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @guest = current_user.guests.find(params[:id])
+    @guest = Guest.find(params[:id])
     respond_to do |format|
         @guest.destroy
-        format.html { redirect_to guests_url }
+        format.html { redirect_to admin_guests_url }
         format.json { head :no_content }
     end
   end
