@@ -24,10 +24,6 @@ class Room < ActiveRecord::Base
     statut
   end
   
-  def places
-    4
-  end
-  
   def check_max
     errors.add(:maximum, "nombre de reservations atteintes pour #{self.class}") if(self.class.count >= self.max)
   end

@@ -3,6 +3,14 @@ class Guest < User
   belongs_to :invited_by, :class_name=>"User"
   validates_presence_of :name, :invited_by
   validate :further_validations
+
+  def self.search(search)
+    if(search)
+      where('upper(name) LIKE upper(?)', "%#{search}%")
+    else
+      scoped
+    end
+  end
   
   def get_statut
   end
