@@ -32,6 +32,8 @@
         <td><% if guest.at_diner?%><i class="icon-ok"/><% end %></td>
         <td><% if guest.room %><%= guest.room.name %><% end %></td>
         <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_admin_guest_path(guest), :class => 'btn btn-mini' %>
           <% unless(guest.myself) %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       admin_guest_path(guest),

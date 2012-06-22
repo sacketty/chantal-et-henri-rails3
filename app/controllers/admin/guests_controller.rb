@@ -4,12 +4,58 @@ class GuestsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    scope = params[:join] ? Guest.joins(params[:join]).order("#{params[:join]}.#{params[:sort]}") : Guest.order(sort_column + " " + sort_direction)
-    @guests=scope.search(params[:search]).page(params[:page]).per(10)
+    guests_index
   end
   
   def show
     @guest = User.find(params[:id])
+  end 
+  
+  # GET /admin/guests/invite/1/edit
+  def invite
+    @guest = Guest.find_by_id(params[:id])
+  end
+  
+  # PUT /admin/guests/invite/1
+  def update_invite
+    @guest = Guest.find(params[:id])
+    @guest.invited_by_id = params[:guest][:invited_by_id]
+    respond_to do |format|
+      if (@guest.save)
+        format.html do
+          guests_index
+          render action: "index"
+        end
+        format.json { head :no_content }
+      else
+        msg = "Requete invalide: #{@guest.errors.full_messages}"
+        format.html { redirect_to guests_url, alert: msg }
+        format.json { render json: @guest.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  # GET /users/1/edit
+  def edit
+    @guest = Guest.find_by_id(params[:id])
+  end
+  
+  # PUT /users/1
+  # PUT /users/1.json
+  def update
+    @guest = Guest.find(params[:id])
+    respond_to do |format|
+      if (@guest.update_attributes(params[:guest]))
+        format.html do
+          render action: "index"
+        end
+        format.json { head :no_content }
+      else
+        msg = "Requete invalide: #{@guest.errors.full_messages}"
+        format.html { redirect_to guests_url, alert: msg }
+        format.json { render json: @guest.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
 
@@ -25,6 +71,11 @@ class GuestsController < ApplicationController
   end
 
 private
+
+  def guests_index
+    scope = params[:join] ? Guest.joins(params[:join]).order("#{params[:join]}.#{params[:sort]}") : Guest.order(sort_column + " " + sort_direction)
+    @guests=scope.search(params[:search]).page(params[:page]).per(10)
+  end
   
   def sort_column
     params[:sort] || "name"

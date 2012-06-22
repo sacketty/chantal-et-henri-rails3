@@ -23,13 +23,15 @@
   <div class="control-group">
     <%= f.label "Hebergement", :class => 'control-label' %>
     <div class="controls">
-    	<%= f.select("room_id", current_user.rooms.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'})%>
+    	<%= f.select("room_id", @guest.invited_by.rooms.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'})%>
     </div>
   </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to "Invité par",
+                edit_invite_admin_guest_path, :class => 'btn btn-warning' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                guests_path, :class => 'btn' %>
+                admin_guests_path, :class => 'btn' %>
   </div>
 <% end %>

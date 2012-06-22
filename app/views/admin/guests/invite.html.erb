@@ -1,0 +1,17 @@
+<%- model_class = @guest.class -%>
+<h3><%= "#{@guest.name}" %></h3>
+<p>                           
+	<%= form_for @guest, :url=> invite_admin_guest_path, :html => { :class => 'form-horizontal' } do |f| %>
+	  <div class="control-group">
+	    <%= f.label "Invité par", :class => 'control-label' %>
+	    <div class="controls">
+	    	<%= f.select("invited_by_id", User.all.collect {|p| [ p.name, p.id ] })%>
+	    </div>
+	  </div>
+
+	  <div class="form-actions">
+	    <%= f.submit nil, :class => 'btn btn-primary' %>
+	    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	                edit_admin_guest_path(@guest), :class => 'btn' %>
+	  </div>
+	<% end %>
