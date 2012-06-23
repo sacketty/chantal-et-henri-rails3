@@ -6,9 +6,9 @@ class GuestsController < ApplicationController
   def index
     guests_index
     respond_to do |format|
-      format.html
+      format.html { guests_index }
       format.pdf do
-        pdf = GuestsPdf.new(@guests)
+        pdf = GuestsPdf.new(@guests_all)
         file = "Liste Chantal et Henri"
         send_data pdf.render, filename: file,
             type: "application/pdf", disposition: "inline"
@@ -90,6 +90,7 @@ private
 
   def guests_index
     scope = params[:join] ? Guest.joins(params[:join]).order("#{params[:join]}.#{params[:sort]}") : Guest.order(sort_column + " " + sort_direction)
+    @guests_all = scope.search(params[:search])
     @guests=scope.search(params[:search]).page(params[:page]).per(10)
   end
   

@@ -30,9 +30,13 @@ class GuestsPdf < Prawn::Document
   def guest_item_rows
     m = 
     d = Presence.count(conditions: ["diner = ?", true])
-    [["Nom", "Mairie", "Diner", "Chambre"]] + 
+    [["Nom", "par", "M", "S", "Chambre"]] + 
     @guests.compact.map do |guest|
-      [guest.name, guest.at_mairie? ? "x" : "", guest.at_diner? ? "x" : "", guest.room ? guest.room.name : ""]
+      by = guest.invited_by ? guest.invited_by.name : ""
+      m = guest.at_mairie? ? "x" : ""
+      d = guest.at_diner? ? "x" : ""
+      r = guest.room ? guest.room.name : ""
+      [guest.name, by , m, d, r]
     end
   end
   
