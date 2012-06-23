@@ -30,7 +30,7 @@ class Room < ActiveRecord::Base
       g << " x "      
     end
     g = g[0..places-1]
-    g.join(" | ")
+    "ref:#{self.id} -> #{g.join(" | ")}"
   end
   
   def check_max
