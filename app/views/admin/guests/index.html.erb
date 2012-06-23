@@ -2,7 +2,8 @@
 
 <%= paginate @guests %>
 
-<h1>Les invit&eacute;s</h1><p></p>
+<h2><%= link_to "Les invités", admin_guests_path%></h2>
+<p></p>
 <%= form_tag admin_guests_path, method: :get do %>
   <%= hidden_field_tag :direction, params[:direction] %>
   <%= hidden_field_tag :sort, params[:sort] %>
@@ -27,7 +28,14 @@
     <% for guest in @guests %>
       <tr>
         <td><%= guest.name %></td>
-        <td><%= guest.invited_by ? guest.invited_by.name : "" %></td>
+        <td>
+	      <% if(guest.invited_by)%>
+            <%= link_to guest.invited_by.name,
+                      admin_users_invites_path(guest.invited_by) %>
+	      <% else %>
+	        ""
+	      <% end %>
+	    </td>
         <td><% if guest.at_mairie?%><i class="icon-ok"/><% end %></td>
         <td><% if guest.at_diner?%><i class="icon-ok"/><% end %></td>
         <td><% if guest.room %><%= guest.room.name %><% end %></td>

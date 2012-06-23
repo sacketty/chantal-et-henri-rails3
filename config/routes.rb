@@ -18,6 +18,7 @@ ChantalEtHenriRails3::Application.routes.draw do
   match 'email/:id', to: "emails#destroy", via: :delete
   match 'admin/guests/invite/:id/edit', to: "admin/guests#invite" , via: :get, as: :edit_invite_admin_guest
   match 'admin/guests/invite/:id', to: "admin/guests#update_invite" , as: :invite_admin_guest
+  match 'admin/guests/:id/invites', to: "admin/guests#users_invites" , as: :admin_users_invites
   
   match "/songs/all", to: "songs#all"
   match "/uploads/all", to: "uploads#all"

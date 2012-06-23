@@ -33,6 +33,12 @@ class GuestsController < ApplicationController
         format.json { render json: @guest.errors, status: :unprocessable_entity }
       end
     end
+  end 
+  
+  #get /admin/guests/id/invites
+  def users_invites
+    @guests=User.find(params[:id]).guests.page(params[:page]).per(10)
+    render action: "index"
   end
   
   # GET /users/1/edit
