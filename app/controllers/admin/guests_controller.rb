@@ -5,6 +5,15 @@ class GuestsController < ApplicationController
 
   def index
     guests_index
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = GuestsPdf.new(@guests)
+        file = "Liste Chantal et Henri"
+        send_data pdf.render, filename: file,
+            type: "application/pdf", disposition: "inline"
+      end
+    end
   end
   
   def show
