@@ -23,7 +23,7 @@
   <div class="control-group">
     <%= f.label "Hebergement", :class => 'control-label' %>
     <div class="controls">
-    	<%= f.select("room_id", current_user.rooms.available.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'})%>
+    	<%= f.select("room_id", current_user.rooms.available.collect {|p| [ p.full_name, p.id ] }, {:include_blank => 'None'})%>
     </div>
   </div>
 

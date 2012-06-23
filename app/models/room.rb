@@ -22,6 +22,15 @@ class Room < ActiveRecord::Base
       (1..qty).each { |i| @ch = user.send(attr).create!}
     end
     statut
+  end   
+  
+  def full_name 
+    g = self.guests.map {|x| x.name}
+    for i in g.length..places-1 do
+      g << " x "      
+    end
+    g = g[0..places-1]
+    g.join(" | ")
   end
   
   def check_max

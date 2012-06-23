@@ -23,6 +23,14 @@
       <th>Chambre</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th><%= Presence.count(:conditions=>["mairie = ?", true]) %></th>
+      <th><%= Presence.count(:conditions=>["diner = ?", true]) %></th>
+      <th><%= Room.count %></th>
+      <th></th>
+    </tr>
   </thead>
   <tbody>
     <% for guest in @guests %>
