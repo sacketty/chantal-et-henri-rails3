@@ -1,4 +1,4 @@
-<%= form_for @guest, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @guest, :url=>admin_guest_path, :html => { :class => 'form-horizontal' } do |f| %>
   <% @guest.mairie = true if @guest.at_mairie? %>
   <% @guest.diner = true if @guest.at_diner? %>
   <div class="control-group">

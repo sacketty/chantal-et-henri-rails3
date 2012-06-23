@@ -47,6 +47,7 @@ class GuestsController < ApplicationController
     respond_to do |format|
       if (@guest.update_attributes(params[:guest]))
         format.html do
+          guests_index
           render action: "index"
         end
         format.json { head :no_content }
