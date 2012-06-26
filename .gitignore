@@ -16,3 +16,5 @@
 .project
 Gemfile.lock
 latest.dump
+/amazon_s3_temp/*
+
