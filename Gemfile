@@ -6,6 +6,8 @@ gem 'aws-s3'
 gem 'thin'
 gem 'kaminari'
 gem 'prawn'
+gem 'ruby-mp3info'
+gem 'mechanize'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
