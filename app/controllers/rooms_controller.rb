@@ -57,11 +57,13 @@ class RoomsController < ApplicationController
   # PUT /rooms/1
   # PUT /rooms/1.json
   def update
+    params[:room] = params[:room_single]
+    params[:room] ||= params[:room_double]
     @room = Room.find(params[:id])
 
     respond_to do |format|
       if @room.update_attributes(params[:room])
-        format.html { redirect_to @room, notice: 'Room was successfully updated.' }
+        format.html { redirect_to room_url, notice: 'Room was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

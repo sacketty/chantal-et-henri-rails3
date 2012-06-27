@@ -3,22 +3,20 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:number) %></th>
+      <th><%= "Numéro" %></th>
+      <th><%= "Réservation" %></th>
+      <th><%= "Référence "%></th>
       <th><%= model_class.human_attribute_name(:places) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @rooms.each do |room| %>
       <tr>
-        <td><%= link_to room.id, room_path(room) %></td>
-        <td><%= room.user_id %></td>
         <td><%= room.number %></td>
+        <td><%= room.user.name %></td>
+        <td><%= link_to room.name, room_path(room) %></td>
         <td><%= room.places %></td>
-        <td><%=l room.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_room_path(room), :class => 'btn btn-mini' %>
