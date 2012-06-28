@@ -1,5 +1,5 @@
 class GuestsPdf < Prawn::Document
-  def initialize(guests)
+  def initialize(guests=nil)
     super() 
     @guests = guests
     title
@@ -46,4 +46,5 @@ class GuestsPdf < Prawn::Document
     text "Total diner: #{Presence.count(conditions: ["diner = ?", true])}", size: 16, style: :bold
     text "Total chambres: #{Room.count}", size: 16, style: :bold
   end
+  
 end

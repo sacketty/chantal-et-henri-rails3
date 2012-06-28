@@ -9,6 +9,15 @@ class Room < ActiveRecord::Base
     self.update_room(statut, :doubles)
   end
   
+  def guests_list
+    list = ""
+    guests.each do |g|
+      list += "\n" if list.size > 0
+      list += g.name
+    end
+    list
+  end
+  
   def self.update_room(statut,attr)
     qty = attr == :singles ? statut.delta_s : statut.delta_d
     user = statut.user

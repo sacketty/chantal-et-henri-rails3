@@ -3,12 +3,29 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all
+    @rooms = Room.order("id ASC")
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @rooms }
+      format.pdf do
+        params[:alt].nil? ? list_rooms : list_guests
+      end
     end
+  end
+  
+  def list_rooms
+    pdf = RoomsPdf.new(@rooms)
+    file = "Rooming List Chantal et Henri"
+    send_data pdf.render, filename: file,
+        type: "application/pdf", disposition: "inline"
+  end
+  
+  def list_guests
+    pdf = GuestsListPdf.new()
+    file = "Liste des invites"
+    send_data pdf.render, filename: file,
+        type: "application/pdf", disposition: "inline"
   end
 
   # GET /rooms/1
