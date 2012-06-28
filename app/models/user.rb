@@ -90,8 +90,8 @@ private
 
   def set_presence
     self.presence ||= self.build_presence
-    self.presence.mairie = ( self.mairie=="1" )
-    self.presence.diner = ( self.diner=="1" )
+    self.presence.mairie = ( self.mairie=="1" ) if self.mairie
+    self.presence.diner = ( self.diner=="1" ) if self.diner
     self.presence.save
   end
   

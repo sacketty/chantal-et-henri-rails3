@@ -65,7 +65,7 @@ class TablesController < ApplicationController
     @table = Table.find(params[:id])
     @guest.table = @table
     respond_to do |format|
-      if @guest.save
+      if @guest.update_attribute(:table_id,params[:id])
         format.html { redirect_to @table, notice: 'Ok.' }
         format.json { head :no_content }
       else
