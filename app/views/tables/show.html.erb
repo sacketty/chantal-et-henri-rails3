@@ -1,0 +1,54 @@
+<%- model_class = @table.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human %></h1>
+
+<p>
+  <strong><%= model_class.human_attribute_name(:name) %>:</strong><br>
+  <%= @table.name %>
+</p>
+<p>
+  <strong><%= model_class.human_attribute_name(:seats) %>:</strong><br>
+  <%= @table.seats %>
+</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= "Invités" %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @table.guests.each do |guest| %>
+  <tr>
+  	<td><%= guest.name %></td>
+    <td>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    table_guest_path(@table,guest),
+                    :method => :delete,
+                    :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                    :class => 'btn btn-mini btn-danger' %>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+</hr>
+<%= form_for @table, :url=> table_guest_path(@table), :html => { :class => 'form-horizontal' } do |f| %>
+<div class="control-group">
+  <div class="controls">
+	<%= f.submit "Ajouter un invité", :class => 'btn btn-primary', :disabled => @table.guests.size >= @table.seats %>
+  	<%= f.select("guest_id", Guest.to_install.collect {|p| [ p.name, p.id ] })%>
+  </div>
+</div>
+<% end %>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              tables_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_table_path(@table), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              table_path(@table),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>

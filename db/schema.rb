@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618152942) do
+ActiveRecord::Schema.define(:version => 20120628143735) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -109,6 +109,13 @@ ActiveRecord::Schema.define(:version => 20120618152942) do
     t.integer  "chambre2"
   end
 
+  create_table "tables", :force => true do |t|
+    t.string   "name"
+    t.integer  "seats"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "uploads", :force => true do |t|
     t.string   "key"
     t.string   "titre"
@@ -136,10 +143,12 @@ ActiveRecord::Schema.define(:version => 20120618152942) do
     t.integer  "invited_by_id"
     t.boolean  "myself"
     t.integer  "room_id"
+    t.integer  "table_id"
   end
 
   add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
   add_index "users", ["provider", "uid"], :name => "index_users_on_provider_and_uid", :unique => true
   add_index "users", ["room_id"], :name => "index_users_on_room_id"
+  add_index "users", ["table_id"], :name => "index_users_on_table_id"
 
 end

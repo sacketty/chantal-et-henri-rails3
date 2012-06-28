@@ -1,5 +1,9 @@
 ChantalEtHenriRails3::Application.routes.draw do
   
+  resources :tables do
+#    resources :guests
+  end
+
   resources :rooms
   
 #  resources :liste_mariages
@@ -18,7 +22,11 @@ ChantalEtHenriRails3::Application.routes.draw do
   match 'email/:id', to: "emails#destroy", via: :delete
   match 'admin/guests/invite/:id/edit', to: "admin/guests#invite" , via: :get, as: :edit_invite_admin_guest
   match 'admin/guests/invite/:id', to: "admin/guests#update_invite" , as: :invite_admin_guest
-  match 'admin/guests/:id/invites', to: "admin/guests#users_invites" , as: :admin_users_invites
+  match 'admin/guests/:id/invites', to: "admin/guests#users_invites" , as: :admin_users_invites 
+  
+  #table guests
+  match '/tables/:table_id/guests/:id', to: "tables#add_guest" , as: :table_guest, via: :put
+  match '/tables/:table_id/guests/:id', to: "tables#destroy_guest" , as: :table_guest, via: :delete
   
   match "/songs/all", to: "songs#all"
   match "/uploads/all", to: "uploads#all"
