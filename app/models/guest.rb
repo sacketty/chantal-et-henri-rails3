@@ -28,6 +28,7 @@ class Guest < User
     return unless room
     disp = self.room.guests - [self]
     self.errors.add(:chambre, "'#{self.room.name}' surchargee ") unless disp.size < self.room.places
+    return unless self.table
     disp = self.table.guests - [self]
     self.errors.add(:table, "'#{self.table.name}' surchargee ") unless disp.size < self.table.seats
   end
