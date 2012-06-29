@@ -35,7 +35,7 @@
   <tbody>
     <% for guest in @guests %>
       <tr>
-        <td><%= guest.name %></td>
+        <td><%= link_to guest.name, admin_guest_path(guest) %></td>
         <td>
 	      <% if(guest.invited_by)%>
             <%= link_to guest.invited_by.name,

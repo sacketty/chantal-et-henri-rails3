@@ -31,7 +31,6 @@ class User < ActiveRecord::Base
   has_many :uploads, :through => :songs
   has_many :direct_uploads, :class_name => "Upload", :foreign_key=>:added_by_id
   after_initialize :set_initial_values
-  after_save :set_presence
   after_create :make_guest
   
   validates_presence_of :name
@@ -87,13 +86,6 @@ class User < ActiveRecord::Base
   end
   
 private
-
-  def set_presence
-    self.presence ||= self.build_presence
-    self.presence.mairie = ( self.mairie=="1" ) if self.mairie
-    self.presence.diner = ( self.diner=="1" ) if self.diner
-    self.presence.save
-  end
   
   def make_guest
     self.guests.create(name: self.name, myself: true)

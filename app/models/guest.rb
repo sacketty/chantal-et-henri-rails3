@@ -4,6 +4,8 @@ class Guest < User
   belongs_to :table
   validates_presence_of :name, :invited_by
   validate :further_validations
+  before_save :set_presence
+  after_save :save_presence
 
   def self.search(search)
     if(search)
@@ -22,6 +24,18 @@ class Guest < User
   end
   
   def make_guest
+  end
+
+  def set_presence
+    self.presence ||= self.build_presence
+    self.presence.mairie = ( self.mairie=="1" ) if self.mairie
+    self.presence.diner = ( self.diner=="1" ) if self.diner
+    self.table = nil if !self.presence.diner
+    self.presence.save
+  end
+
+  def save_presence
+    self.presence.save
   end
   
   def further_validations
