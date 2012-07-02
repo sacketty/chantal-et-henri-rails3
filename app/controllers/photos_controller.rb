@@ -42,6 +42,7 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(params[:photo])
     @photo.user = current_user
+    @photo.name = params[:photo][:image].original_filename if params[:photo][:name].length == 0
 
     respond_to do |format|
       if @photo.save
