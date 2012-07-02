@@ -1,5 +1,7 @@
 ChantalEtHenriRails3::Application.routes.draw do
   
+  resources :photos
+
   resources :tables do
 #    resources :guests
   end

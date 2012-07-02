@@ -1,0 +1,19 @@
+<h2>Mes Photos</h2>
+
+<div id="paintings">
+  <% for photo in @photos %>
+    <div class="painting">
+      <%= link_to(image_tag(photo.image_url(:thumb)), photo_path(photo)) if photo.image? %>
+      <div class="name"><%= link_to photo.name, photo_path(photo) %></div>
+      <div class="actions">
+        <%= link_to "edit", edit_photo_path(photo) %> |
+        <%= link_to "remove", photo, :confirm => 'Are you sure?', :method => :delete %>
+      </div>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
+
+<%= link_to "Nouvelle photo",
+            new_photo_path,
+            :class => 'btn btn-primary' %>

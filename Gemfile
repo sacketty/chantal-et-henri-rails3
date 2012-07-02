@@ -8,6 +8,8 @@ gem 'kaminari'
 gem 'prawn'
 gem 'ruby-mp3info'
 gem 'mechanize'
+gem 'carrierwave'
+gem 'rmagick'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   attr_accessor :x_activated, :mairie, :diner
   has_many :category_users, :dependent => :destroy
   has_one  :statut, :dependent => :destroy
+  has_many :photos
   has_many :presences, :through => :guests do
     def at(lieu)
       find(:all, :conditions=>"\"presences\".\"#{lieu}\" IS TRUE")
