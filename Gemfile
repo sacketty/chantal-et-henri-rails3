@@ -10,7 +10,7 @@ gem 'ruby-mp3info'
 gem 'mechanize'
 gem 'carrierwave'
 gem 'rmagick'
-gem "fog", "~> 1.3.1"
+gem 'fog', '~> 1.4.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
