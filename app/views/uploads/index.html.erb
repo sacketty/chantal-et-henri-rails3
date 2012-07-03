@@ -1,3 +1,4 @@
+<div class="span9 columns">
 <%- model_class = Upload.new.class -%>
 
 <%= paginate @uploads %>
@@ -10,7 +11,6 @@
       <th><%= model_class.human_attribute_name(:titre) %></th>
       <th><%= model_class.human_attribute_name(:artiste) %></th>
       <th>Catégories</th>
-      <th>Ecouter</th>
     </tr>
   </thead>
   <tbody>
@@ -20,20 +20,12 @@
         <td><%= ul.titre %></td>
         <td><%= ul.artiste %></td>
         <td><%= (ul.categories.map {|c| c.name}).join(", ") %></td>
-        <td>
-        <div id='mediaplayer_<%= ul.id%>'></div>
-			<script type="text/javascript">
-				jwplayer('mediaplayer_<%= ul.id %>').setup({
-					'flashplayer': '/assets/jwplayer/player.swf',
-					'id': 'playerID_<%=ul.id %>',
-					'width': '280',
-					'height': '24',
-					'file': '<%= ul.s3_url %>',
- 					'controlbar': 'bottom'
-				});
-		</script>
-        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to 'Ajouter des clips',
+            new_upload_path,
+            :class => 'btn btn-primary' %> 
+</div>

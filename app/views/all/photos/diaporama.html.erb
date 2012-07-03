@@ -1,0 +1,20 @@
+<div class="span12 columns">
+<div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner">
+      <% idx = 0 %>
+	  <% for photo in Photo.accepted %>
+	    <% klass = idx==0 ? "item active" : "item" %>
+        <div class="<%= klass %>">
+		   <%= image_tag(photo.image_url(:slide)) %>
+		   <div class="carousel-caption">
+		     <h4><%= photo.name %></h4>
+		     <p><%= "uploadé par #{photo.user.name}" %>
+		   </div>
+        </div>
+        <% idx += 1 %>
+	  <% end %>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>   
+</div>

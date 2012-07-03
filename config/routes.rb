@@ -1,6 +1,4 @@
 ChantalEtHenriRails3::Application.routes.draw do
-  
-  resources :photos
 
   resources :tables do
 #    resources :guests
@@ -17,7 +15,14 @@ ChantalEtHenriRails3::Application.routes.draw do
     resources :guests
     resources :photos
   end
-
+  
+  namespace :all do
+    resources :photos
+  end
+  
+  resources :photos
+  match "/all/diaporama", to: "all/photos#diaporama"
+  
   resources :infos
   match 'statuts/:id', to: "statuts#edit", as: :edit_statuts
   match 'emails', to: "emails#index", as: :emails, via: :get
@@ -31,11 +36,11 @@ ChantalEtHenriRails3::Application.routes.draw do
   match '/tables/:table_id/guests/:id', to: "tables#add_guest" , as: :table_guest, via: :put
   match '/tables/:table_id/guests/:id', to: "tables#destroy_guest" , as: :table_guest, via: :delete
   
-#  match "/songs/all", to: "songs#all"
-#  match "/uploads/all", to: "uploads#all"
-#  resources :songs
-#  resources :s3_uploads
-#  resources :uploads
+  match "/songs/all", to: "songs#all"
+  match "/uploads/all", to: "uploads#all"
+  resources :songs
+  resources :s3_uploads
+  resources :uploads
   resources :users do
     resources :emails
   end

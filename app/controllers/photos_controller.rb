@@ -14,9 +14,6 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    if(params[:id]=='all')
-      return render :album
-    end
     @photo = Photo.find(params[:id])
 
     respond_to do |format|

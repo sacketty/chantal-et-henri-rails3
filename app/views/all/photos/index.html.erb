@@ -1,0 +1,16 @@
+<div class="span12 columns">
+<h2>Les photos du mariage</h2>
+
+<div id="paintings">
+  <% if Photo.accepted.count > 0 %>
+	  <% for photo in Photo.accepted %>
+	    <div class="painting">
+	      <%= link_to(image_tag(photo.image_url(:thumb)), all_photo_path(photo)) if photo.image? %>
+	      <div class="name"><%= link_to photo.short_name, all_photo_path(photo) %></div>
+	    </div>
+	  <% end %>
+  <% else %>
+    <div class="name">Patience..., elles arrivent... ;-) </div>
+  <% end %>
+</div>
+</div>

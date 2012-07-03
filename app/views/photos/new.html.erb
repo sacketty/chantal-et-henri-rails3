@@ -13,6 +13,7 @@
     });
   });
 </script>
+<div class="span9 columns">
 <%- model_class = @photo.class -%>
 <h2>Envoyer des photos</h2>
 <%= form_for @photo, :html => { :class => 'form-horizontal', :multipart =>true } do |f| %>
@@ -20,7 +21,8 @@
   <input type="file" name="file_upload" id="file_upload" />
 
   <div class="form-actions">
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    <%= link_to t('.back', :default => t("helpers.links.back")),
                 photos_path, :class => 'btn' %>
   </div>
 <% end %>
+</div>

@@ -1,5 +1,6 @@
+<div class="span3 columns">
 <%- model_class = @ul.class -%>
-<h2>Détails du titre</h2>
+<h2>Détails du clip</h2>
 <p>
   <strong><%= model_class.human_attribute_name(:titre) %>:</strong><br>
   <%= @ul.titre %>
@@ -16,14 +17,16 @@
   <strong><%= model_class.human_attribute_name(:url) %>:</strong><br>
   <a href='<%= @ul.s3_url %>'>Télécharger</a>
 </p>
+</div>
 <p>
+<div class="span9 columns">
   <div id='mediaplayer_<%= @ul.id%>'></div>
   <script type="text/javascript">
 				jwplayer('mediaplayer_<%= @ul.id %>').setup({
 					'flashplayer': '/assets/jwplayer/player.swf',
 					'id': 'playerID_<%=@ul.id %>',
-					'width': '280',
-					'height': '96',
+					'width': '640',
+					'height': '480',
 					'file': '<%= @ul.s3_url %>',
     'author': '<%= @ul.artiste %>',
     'description': '<%= "Artiste: "+@ul.artiste if @ul.artiste %>\n<%= "Uploaded by: "+@ul.added_by.name if @ul.added_by %>',
@@ -36,6 +39,8 @@
 				});
   </script>
 </p>
+</div>
+<div class="span12 columns">
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
@@ -49,4 +54,5 @@
               :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
               :class => 'btn btn-danger' %>
           <% end %>
+</div>
 </div>

@@ -1,0 +1,13 @@
+<div class="span12 columns">
+<%- model_class = @photo.class -%>
+<h2><%= @photo.name %></h2>
+
+<p>
+  <%= image_tag @photo.image_url(:show) if @photo.image? %>
+</p>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              all_photos_path, :class => 'btn'  %>
+</div>
+</div>

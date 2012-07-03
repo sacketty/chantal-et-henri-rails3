@@ -30,17 +30,10 @@
 								</li>
 								<% if current_user%>
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= "Multimédia" %><b class="caret"></b></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Les photos<b class="caret"></b></a>
 									<ul class="dropdown-menu">
-										<li class="divider"></li>
-										<li class="nav-header">Les photos</li>
-										<li><a href="/all/photos"><%= "L'album" %></a></li>
-										<li><a href="/all/diaporama"><%= "Diaporama" %></a></li>
+										<li><a href="/photos/all"><%= "L'album" %></a></li>
 										<li><a href="/photos">Mes photos</a></li>
-										<li class="divider"></li>
-										<li class="nav-header"><%= "Vidéos et sons"%></li>
-										<li><a href="/uploads/all"><%= "Tous" %></a></li>
-										<li><a href="/uploads">Les miens</a></li>
 									</ul>
 								</li>
 								<% if current_user.admin %>
@@ -79,7 +72,31 @@
          	<%= msg %>
         </div>
       <% end %>
-	  <%= yield %>
-	  </div>
+			<% if current_user %>
+				<div class="span3">
+					
+					<div id="img_holder" class="row">
+						<img src="/assets/cycle/ch1_240x180.jpg" alt="" />
+					</div>
+					
+					<div class="row well">
+						<h3>Les infos...</h3><br>
+						<% Info.all.each do |info| %>
+							<strong><%= info.subject %></strong>
+							<blockquote>
+								<%= info.text %>
+								<small><%= info.created_at %></small>
+							</blockquote>
+						<% end %>
+					</div>
+
+				</div>
+				<div class="span9">
+					<%= yield %>
+				</div>
+			<% else %>
+			<%= yield %>
+			<% end %>
+		</div>
 	</body>
 </html>

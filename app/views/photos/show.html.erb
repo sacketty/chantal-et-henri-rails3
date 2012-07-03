@@ -1,8 +1,9 @@
+<div class="span12 columns">
 <%- model_class = @photo.class -%>
 <h2><%= @photo.name %></h2>
 
 <p>
-  <%= image_tag @photo.image_url() if @photo.image? %>
+  <%= image_tag @photo.image_url(:show) if @photo.image? %>
 </p>
 
 <div class="form-actions">
@@ -15,4 +16,5 @@
               :method => 'delete',
               :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
               :class => 'btn btn-danger' %>
+</div>
 </div>
