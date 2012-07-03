@@ -55,7 +55,7 @@ module Admin
       @photo.destroy
 
       respond_to do |format|
-        format.html { redirect_to photos_url }
+        format.html { redirect_to admin_photos_url }
         format.json { head :no_content }
       end
     end
