@@ -10,11 +10,12 @@ ChantalEtHenriRails3::Application.routes.draw do
   
 #  resources :liste_mariages
 
-  resources :statut
-  resources :statuts
+#  resources :statut
+#  resources :statuts
   resources :guests
   namespace :admin do
     resources :guests
+    resources :photos
   end
 
   resources :infos
@@ -30,11 +31,11 @@ ChantalEtHenriRails3::Application.routes.draw do
   match '/tables/:table_id/guests/:id', to: "tables#add_guest" , as: :table_guest, via: :put
   match '/tables/:table_id/guests/:id', to: "tables#destroy_guest" , as: :table_guest, via: :delete
   
-  match "/songs/all", to: "songs#all"
-  match "/uploads/all", to: "uploads#all"
-  resources :songs
-  resources :s3_uploads
-  resources :uploads
+#  match "/songs/all", to: "songs#all"
+#  match "/uploads/all", to: "uploads#all"
+#  resources :songs
+#  resources :s3_uploads
+#  resources :uploads
   resources :users do
     resources :emails
   end

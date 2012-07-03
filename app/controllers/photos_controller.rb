@@ -1,9 +1,10 @@
 class PhotosController < ApplicationController
+#  before_filter :require_login
   # GET /photos
   # GET /photos.json
   def index
-    @photos = current_user.photos
-
+    @user = current_user
+    @photos = @user.photos
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @photos }
@@ -13,6 +14,9 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
+    if(params[:id]=='all')
+      return render :album
+    end
     @photo = Photo.find(params[:id])
 
     respond_to do |format|
@@ -24,7 +28,8 @@ class PhotosController < ApplicationController
   # GET /photos/new
   # GET /photos/new.json
   def new
-    @photo = current_user.photos.build
+    @user = current_user
+    @photo = @user.photos.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,10 +45,14 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo = Photo.new(params[:photo])
-    @photo.user = current_user
-    @photo.name = params[:photo][:image].original_filename if params[:photo][:name].length == 0
-
+#    raise params.inspect
+#    @photo = Photo.new(params[:photo])
+    @user = User.find(params[:user_id])
+    @photo = @user.photos.build
+#    @photo.name = params[:photo][:image].original_filename if params[:photo][:name].length == 0
+    @photo.name = params['Filename'] 
+    @photo.image = params['Filedata']
+#    raise @photo.inspect
     respond_to do |format|
       if @photo.save
         format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
@@ -75,11 +84,15 @@ class PhotosController < ApplicationController
   # DELETE /photos/1.json
   def destroy
     @photo = Photo.find(params[:id])
-    @photo.destroy
-
     respond_to do |format|
-      format.html { redirect_to photos_url }
-      format.json { head :no_content }
+      if(@photo.accepted)
+        format.html { redirect_to photos_url, alert: "Impossible de supprimer cette photo" }
+        format.json { head :no_content }
+      else
+        @photo.destroy
+        format.html { redirect_to photos_url }
+        format.json { head :no_content }
+      end
     end
   end
 end

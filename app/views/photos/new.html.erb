@@ -1,3 +1,29 @@
+<script type="text/javascript">
+  $(function() {
+    var upload_params = {
+      'user_id' : $('#photo_user_id').val(), 
+      'authenticity_token': $('input[name="authenticity_token"]').val()
+    };
+    $('#file_upload').uploadify({
+        'swf'      : '/assets/uploadify/uploadify.swf',
+        'uploader' : '/photos',
+        // Your options here
+        'method'   : 'post',
+        'formData' : upload_params,
+        'onUploadSuccess' : function(file, data, response) {
+          alert('The file was saved to: ' + data);
+        }
+    });
+  });
+</script>
 <%- model_class = @photo.class -%>
-<h2>Nouvelle photo</h2>
-<%= render :partial => 'form' %>
+<h2>Envoyer des photos</h2>
+<%= form_for @photo, :html => { :class => 'form-horizontal', :multipart =>true } do |f| %>
+  <%= f.hidden_field :user_id%>
+  <input type="file" name="file_upload" id="file_upload" />
+
+  <div class="form-actions">
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                photos_path, :class => 'btn' %>
+  </div>
+<% end %>
