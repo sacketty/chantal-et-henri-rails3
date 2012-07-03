@@ -4,7 +4,7 @@ class Photo < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   validates :user, :name, :presence=>true
   validate :further_validations 
-  
+
   def self.accepted
     find(:all, :conditions=>['accepted = ?', true])
   end
@@ -14,7 +14,7 @@ class Photo < ActiveRecord::Base
   end     
   
   def further_validations
-    errors.add(:photo, "#{self.name} nom de fichier indisponible") if PhotoBox.exists(self.name)
+    errors.add(:photo, "#{self.name} nom de fichier indisponible") if (self.new_record? & PhotoBox.exists(self.name))
   end
   
   def short_name

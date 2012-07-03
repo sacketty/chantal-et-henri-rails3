@@ -42,7 +42,7 @@ module Admin
           format.html { redirect_to admin_photos_url, notice: 'Photo was successfully updated.' }
           format.json { head :no_content }
         else
-          format.html { render action: "edit" }
+          format.html { redirect_to admin_photos_url , alert: @photo.errors.full_messages}
           format.json { render json: @photo.errors, status: :unprocessable_entity }
         end
       end
