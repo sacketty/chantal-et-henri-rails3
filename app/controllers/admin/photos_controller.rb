@@ -38,7 +38,6 @@ module Admin
     # PUT /photos/1
     # PUT /photos/1.json
     def update 
-      raise session.inspect
       @photo = Photo.find(params[:id])
       @photo.accepted = !@photo.accepted  
       respond_to do |format|
