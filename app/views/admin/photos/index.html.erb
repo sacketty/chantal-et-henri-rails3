@@ -4,8 +4,8 @@
 <div id="paintings">
   <% for photo in @photos %>
     <div class="painting">
-      <%= link_to(image_tag(photo.image_url(:thumb)), photo_path(photo)) if photo.image? %>
-      <div class="name"><%= link_to photo.short_name, photo_path(photo) %></div>
+      <%= link_to(image_tag(photo.image_url(:thumb)), admin_photo_path(photo)) if photo.image? %>
+      <div class="name"><%= link_to photo.short_name, admin_photo_path(photo) %></div>
       <div class="actions">
         <%= link_to photo.moderation, admin_photo_path(photo), :method => :put%> |
         <%= link_to "remove", admin_photo_path(photo), :confirm => 'Are you sure?', :method => :delete %>
