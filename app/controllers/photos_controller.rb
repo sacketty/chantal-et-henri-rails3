@@ -52,13 +52,25 @@ class PhotosController < ApplicationController
 #    raise @photo.inspect
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+#        @photos = @user.photos
+        format.html { render action: new, notice: 'Photo was successfully created.' }
         format.json { render json: @photo, status: :created, location: @photo }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to @photo, alert: @photo.errors.full_messages }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def exists 
+    val=0
+    begin
+      PhotoBox.find("uploads/#{params['Filename']}")
+      val=1
+    rescue
+      val=0
+    end    
+    render text: val
   end
 
   # PUT /photos/1

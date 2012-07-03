@@ -6,6 +6,7 @@
     };
     $('#file_upload').uploadify({
         'swf'      : '/assets/uploadify/uploadify.swf',
+//        'checkExisting' : '/exists/photos',
         'uploader' : '/photos',
         // Your options here
         'method'   : 'post',
@@ -25,4 +26,8 @@
                 photos_path, :class => 'btn' %>
   </div>
 <% end %>
+</div>
+<div class="span9 columns">
+  <span class="label label-info">attention!</span>
+  <%= "Un fichier ne pourra pas être uploadé si son nom figure déjà dans notre base de données"%>
 </div>
