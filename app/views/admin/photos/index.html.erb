@@ -1,13 +1,15 @@
 <div class="span12 columns">
-<h2>Toutes les Photos</h2>
-
+<% type = @to_accept ? "Toutes" : "A modérer"%>
+<h2>Les Photos
+  <%= link_to type, toggle_photos_url, :class => 'btn btn-primary'%> </h2>
+</br>
 <div id="paintings">
   <% for photo in @photos %>
     <div class="painting">
       <%= link_to(image_tag(photo.image_url(:thumb)), admin_photo_path(photo)) if photo.image? %>
       <div class="name"><%= link_to photo.short_name, admin_photo_path(photo) %></div>
       <div class="actions">
-        <%= link_to photo.moderation, admin_photo_path(photo), :method => :put%> |
+        <%= link_to photo.moderation, admin_photo_path(photo), :method => :put %> |
         <%= link_to "remove", admin_photo_path(photo), :confirm => 'Are you sure?', :method => :delete %>
       </div>
     </div>

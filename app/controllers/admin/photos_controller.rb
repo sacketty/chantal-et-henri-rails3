@@ -4,7 +4,8 @@ module Admin
     # GET /photos
     # GET /photos.json
     def index
-      @photos = Photo.all
+      @to_accept = session[:to_accept]
+      @photos = @to_accept ? Photo.to_accept : Photo.all
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @photos }
@@ -14,16 +15,18 @@ module Admin
     # GET /photos/1
     # GET /photos/1.json
     def show
-      if(params[:id]=='to-accept')
-        @photos = Photo.to_accept
-        return render :index
-      end
       @photo = Photo.find(params[:id])
 
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @photo }
       end
+    end
+    
+    def toggle
+      session[:to_accept] ||= false
+      session[:to_accept] = !session[:to_accept]
+      redirect_to admin_photos_url
     end
 
 
@@ -34,7 +37,8 @@ module Admin
 
     # PUT /photos/1
     # PUT /photos/1.json
-    def update
+    def update 
+      raise session.inspect
       @photo = Photo.find(params[:id])
       @photo.accepted = !@photo.accepted  
       respond_to do |format|

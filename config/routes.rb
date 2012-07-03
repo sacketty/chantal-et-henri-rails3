@@ -23,6 +23,7 @@ ChantalEtHenriRails3::Application.routes.draw do
   resources :photos
   match "/all/diaporama", to: "all/photos#diaporama"
   match "/exists/photos", to: "photos#exists"
+  match "/toggle/photos", to: "admin/photos#toggle"
   
   resources :infos
   match 'statuts/:id', to: "statuts#edit", as: :edit_statuts
