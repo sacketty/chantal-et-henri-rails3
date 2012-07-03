@@ -53,7 +53,7 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.save
 #        @photos = @user.photos
-        format.html { render action: new, notice: 'Photo was successfully created.' }
+        format.html { render text: "Photo #{@photo.name} was successfully created." }
         format.json { render json: @photo, status: :created, location: @photo }
       else
         format.html { redirect_to @photo, alert: @photo.errors.full_messages }
