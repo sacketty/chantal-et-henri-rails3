@@ -37,7 +37,7 @@ class UserMailer < ActionMailer::Base
     @email = email
     mail(
       from: "chantalethenri@abriva.net", 
-      to: email.to.email,
+      to: email.to.receivers,
       cc: "chantalethenri@abriva.net, #{email.cc}",
       cci: email.cci, 
       return_path: "chantalethenri@abriva.net",

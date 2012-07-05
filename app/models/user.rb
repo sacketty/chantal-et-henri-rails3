@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   end
   has_one  :presence, :dependent => :destroy
   has_many :songs, :through => :category_users
-  has_many :emails, :foreign_key=>:to_id
+  has_many :emails, :as=>:to
   has_many :rooms do
     def available
       list =[]
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   
   def self.no_guests
-    find(:all, :conditions=>'type IS NULL')
+    find(:all, :conditions=>["type IS NULL AND activated = ?", true])
   end
 
   def self.from_omniauth(auth)
@@ -84,6 +84,10 @@ class User < ActiveRecord::Base
   def at_diner?
     return false unless presence
     presence.diner
+  end
+  
+  def receivers
+    self.email
   end
   
 private

@@ -1,0 +1,38 @@
+<%= form_for [@email.to, @email], :url=> admin_group_emails_path, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :to, :class => 'control-label' %>
+    <div class="controls">
+      <h3><%= @email.to.name %></h3>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :subject, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :subject, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :cc, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :cc, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :cci, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :cci, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :text, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :text, :rows=>6, :class => 'text_area' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_groups_path, :class => 'btn' %>
+  </div>
+<% end %>

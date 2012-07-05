@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120703090525) do
+ActiveRecord::Schema.define(:version => 20120704163440) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -36,9 +36,23 @@ ActiveRecord::Schema.define(:version => 20120703090525) do
     t.text     "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "to_type"
   end
 
   add_index "emails", ["to_id"], :name => "index_emails_on_to_id"
+
+  create_table "groups", :force => true do |t|
+    t.string "name"
+    t.text   "description"
+  end
+
+  create_table "groups_users", :force => true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+  end
+
+  add_index "groups_users", ["group_id"], :name => "index_groups_users_on_group_id"
+  add_index "groups_users", ["user_id"], :name => "index_groups_users_on_user_id"
 
   create_table "infos", :force => true do |t|
     t.string   "subject"

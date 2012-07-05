@@ -1,10 +1,9 @@
-<div class="span12 columns">
 <%- model_class = @email.class -%>
 <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
 <p>
   <strong>Destinataire:</strong><br>
-  <%= "#{@email.to.name} < #{@email.to.receivers}>" %>
+  <%= "#{@email.to.name} < #{@email.to.email}>" %>
 </p>
 <p>
   <strong><%= model_class.human_attribute_name(:subject) %>:</strong><br>
@@ -31,5 +30,4 @@
               :method => 'delete',
               :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
               :class => 'btn btn-danger' %>
-</div>
 </div>

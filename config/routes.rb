@@ -14,7 +14,14 @@ ChantalEtHenriRails3::Application.routes.draw do
   namespace :admin do
     resources :guests
     resources :photos
+    resources :groups do
+      resources :emails
+    end
   end
+  
+  #group users
+  match '/admin/groups/:group_id/users/:id', to: "admin/groups#add_user" , as: :admin_group_user, via: :put
+  match '/admin/groups/:group_id/users/:id', to: "admin/groups#destroy_user" , as: :admin_group_user, via: :delete
   
   namespace :all do
     resources :photos
