@@ -35,11 +35,11 @@ class UserMailer < ActionMailer::Base
   
   def send_email(email)
     @email = email
+    cci = email.cci ? email.to.receivers + "," + email.cci : email.to.receivers
     mail(
       from: "chantalethenri@abriva.net", 
-      to: email.to.receivers,
-      cc: "chantalethenri@abriva.net, #{email.cc}",
-      cci: email.cci, 
+      cci: cci,
+      to: "chantalethenri@abriva.net, #{email.cc}",
       return_path: "chantalethenri@abriva.net",
       reply_to: "chantalethenri@abriva.net",
       subject: email.subject

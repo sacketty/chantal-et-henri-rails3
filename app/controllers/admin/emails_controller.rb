@@ -52,7 +52,7 @@ class EmailsController < ApplicationController
         format.html { redirect_to @email, notice: 'Email was successfully created.' }
         format.json { render json: @email, status: :created, location: @email }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to new_admin_group_email_path(group), alert: @email.errors.full_messages }
         format.json { render json: @email.errors, status: :unprocessable_entity }
       end
     end
