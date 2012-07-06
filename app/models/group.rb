@@ -13,6 +13,6 @@ class Group < ActiveRecord::Base
   end 
   
   def receivers
-    self.users.map{|u| "#{u.name} <#{u.email}>"}.join(",")
+    self.users.map{|u| "#{u.name} <#{u.email}>"}
   end
 end

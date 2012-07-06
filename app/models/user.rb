@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
   end
   
   def receivers
-    self.email
+    [self.email]
   end
   
 private
