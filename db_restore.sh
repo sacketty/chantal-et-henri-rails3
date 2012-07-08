@@ -1,4 +1,5 @@
 #!/bin/sh
+/usr/bin/heroku pgbackups:capture --expire
 /usr/bin/curl -o latest.dump `heroku pgbackups:url`   
 rake db:drop
 rake db:create

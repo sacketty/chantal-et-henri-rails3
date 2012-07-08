@@ -30,11 +30,12 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]
+#  process :set_content_disposition 
+  
   #
   # def scale(width, height)
   #   # do something
   # end
-
   # Create different versions of your uploaded files:
   version :thumb do
     process :resize_to_limit => [120, 120]
@@ -51,11 +52,16 @@ class ImageUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w(jpg jpeg gif png)
   end
-
+  
+  def set_content_disposition(*args)
+    self.file.instance_variable_set(:@content_disposition, "attachment")
+  end
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
   #   "something.jpg" if original_filename
   # end
-
+  def fog_attributes
+    { "Content-Disposition" => "attachment" }
+  end
 end

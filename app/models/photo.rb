@@ -24,5 +24,20 @@ class Photo < ActiveRecord::Base
   
   def moderation
     accepted ? "bloquer" : "accepter"
+  end   
+  
+  def s3_object
+    @s3_object ||= PhotoBox.find("uploads/"+self.name)
+  rescue
+    nil
   end
+  
+  def set_attachment
+    return unless s3_object
+    if s3_object.metadata["Content-Disposition"].nil?
+      s3_object.metadata["Content-Disposition"]="attachment"
+      s3_object.store
+    end
+  end
+  
 end
