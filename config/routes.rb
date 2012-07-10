@@ -57,5 +57,6 @@ ChantalEtHenriRails3::Application.routes.draw do
   match "/auth/:provider/callback", to: "sessions#create"
   match "/auth/failure", to: "sessions#failure"
   match "/logout", to: "sessions#destroy", :as => "logout"
+  match "/toggle/users/:btn", to: "users#toggle", as: :toggle_users
 #  match "/upload", to: "uploads#icreate"
 end

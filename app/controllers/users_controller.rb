@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_filter :require_admin
 
-  def index    
+  def index
+    @users = current_list   
   end
   
   def show
@@ -23,6 +24,7 @@ class UsersController < ApplicationController
           UserMailer.registration_confirmation(@user).deliver
         end
         format.html do
+          @users = current_list
           render action: "index"
         end
         format.json { head :no_content }
@@ -32,6 +34,11 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+    
+  def toggle
+    session[:usr_btn] = params[:btn].to_i
+    redirect_to users_url
   end
 
   # DELETE /users/1
@@ -48,6 +55,22 @@ class UsersController < ApplicationController
         format.json { head :no_content }
       end
     end
+  end
+
+private
+  def current_list
+    @btn = [false, false, false]
+    session[:usr_btn] ||= 1
+    @btn[session[:usr_btn]]=true
+    case session[:usr_btn]
+    when 0
+      User.no_guests
+    when 1
+      User.no_guests(false)
+    else
+      User.no_guests(true)
+    end
+    
   end
 
 end

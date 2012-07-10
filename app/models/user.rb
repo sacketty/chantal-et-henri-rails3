@@ -32,12 +32,18 @@ class User < ActiveRecord::Base
   has_many :uploads, :through => :songs
   has_many :direct_uploads, :class_name => "Upload", :foreign_key=>:added_by_id
   after_initialize :set_initial_values
-  after_create :make_guest
   
   validates_presence_of :name
   
-  def self.no_guests
-    find(:all, :conditions=>["type IS NULL AND activated = ?", true])
+  def self.no_guests(activated=nil)
+    if activated.nil?
+      cond = "type IS NULL"
+    elsif activated
+      cond = ["type IS NULL AND activated = ?", true]
+    else
+      cond = ["type IS NULL AND activated IS NULL OR activated = ?", false]
+    end
+    find(:all, :conditions=>cond)
   end
 
   def self.from_omniauth(auth)
@@ -91,10 +97,6 @@ class User < ActiveRecord::Base
   end
   
 private
-  
-  def make_guest
-    self.guests.create(name: self.name, myself: true)
-  end
   
   def set_initial_values
     self.x_activated = self.activated

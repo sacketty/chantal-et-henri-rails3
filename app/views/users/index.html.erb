@@ -1,5 +1,13 @@
+<div class="span12 columns">
 <%- model_class = User.new.class -%>
-<h1>Les utilisateurs</h1><p></p>
+<h2>
+  Les utilisateurs
+  <div class="btn-group">
+    <%= link_to "Tous", toggle_users_url(0), :class => 'btn btn-primary', :disabled => @btn[0] %>
+    <%= link_to "Non autorisés", toggle_users_url(1), :class => 'btn btn-primary', :disabled => @btn[1] %>
+    <%= link_to "Autorisés", toggle_users_url(2), :class => 'btn btn-success', :disabled => @btn[2] %>
+  </div>
+</h2><p></p>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -12,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <% User.no_guests.each do |user| %>
+    <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.id, user_path(user) %></td>
         <td><%= user.name %></td>
@@ -48,5 +56,5 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
 
