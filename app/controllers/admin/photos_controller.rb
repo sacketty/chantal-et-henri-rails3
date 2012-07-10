@@ -4,6 +4,7 @@ module Admin
     # GET /photos
     # GET /photos.json
     def index
+      session[:to_accept] ||= true
       @to_accept = session[:to_accept]
       @photos = @to_accept ? Photo.to_accept : Photo.all
       respond_to do |format|
@@ -24,7 +25,6 @@ module Admin
     end
     
     def toggle
-      session[:to_accept] ||= false
       session[:to_accept] = !session[:to_accept]
       redirect_to admin_photos_url
     end
