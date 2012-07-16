@@ -1,7 +1,7 @@
 <div class="span12 columns">
 <h2>Les photos du mariage</h2>
 
-<%= paginate @photos, :left=>2, :right=>2 %>
+<%= paginate @photos %>
 
 <div id="paintings">
   <% if @photos.count > 0 %>

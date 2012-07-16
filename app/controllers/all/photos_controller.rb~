@@ -4,7 +4,7 @@ module All
     # GET /photos
     # GET /photos.json
     def index
-      @photos = Photo.accepted.page(params[:page]).per(36)
+      @photos = Photo.accepted.page(params[:page]).per(10)
 #      @photos = Photo.accepted
       respond_to do |format|
         format.html # index.html.erb
