@@ -4,7 +4,7 @@
 
 <p>
   <%= image_tag @photo.image_url(:show) if @photo.image? %>
-</p>
+</p>   
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

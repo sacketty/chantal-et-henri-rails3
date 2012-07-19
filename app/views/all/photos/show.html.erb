@@ -5,6 +5,11 @@
 <p>
   <%= image_tag @photo.image_url(:show) if @photo.image? %>
 </p>
+<div class="alert alert-info">
+  <% if @photo.user -%>
+  <b><%= "Envoyé par : "%></b><%= @photo.user.name %>
+  <% end -%>
+</div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
