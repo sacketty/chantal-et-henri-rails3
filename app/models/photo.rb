@@ -10,7 +10,7 @@ class Photo < ActiveRecord::Base
   end
   
   def self.to_accept
-    scoped(:all, :conditions=>['accepted = ?', false])
+    scoped(:conditions=>['accepted = ?', false])
   end     
   
   def further_validations
